@@ -1,4 +1,4 @@
-#This is the code to load up the starlib package.
+#This is the code to load up the starlib package from my local machine.
 
 library(devtools)
 
@@ -12,3 +12,9 @@ install("/Users/jennstarling/TAMU/starlib")
 library(starlib)		#Load custom starlib package for all custom functions.
 data(package='starlib')	#View available starlib data sets.
 ls("package:starlib")	#View all functions in starlib package.
+
+#This is the code to install the starlib package from github.
+library(devtools)
+install_github(repo="jstarling1/starlib", username = NULL, ref = "master", 
+    subdir = NULL, auth_token = github_pat(quiet), host = "api.github.com", 
+    force = FALSE, quiet = FALSE)
