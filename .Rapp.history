@@ -1,0 +1,2369 @@
+head(X)
+head(X_hat)
+?svd
+?scale
+X_scaled <- scale(X,center=T,scale=F)
+head(X_scaled)
+pca_out <- prcomp(Xt, center=T, scale=F)#
+svd_out <- svd(scale(Xt,center=T,scale=F))
+Xt <- t(X)#
+pca_out <- prcomp(Xt, center=T, scale=F)#
+svd_out <- svd(scale(Xt,center=T,scale=F))
+summary(pca_out)
+pca_out
+head(pca_out)
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,colnames=c('Sample1', 'Sample2', 'Sample3'))
+?matrix
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,dimnames=list(,c('Sample1', 'Sample2', 'Sample3')))
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3')))
+head(X)
+library(MASS)#
+n <- 500; p <- 3#
+#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma,dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3')))#
+#
+## Sample covariance matrix and its eigen-decomposition.#
+S <- var(X)#
+egn_S <- eigen(S)#
+#
+## PCA and SVD.#
+pca_out <- prcomp(X, center = TRUE, scale = FALSE)#
+svd_out <- svd(scale(X, center = TRUE, scale = FALSE))#
+	#The scale function is column-centering the data for the SVD. The wall_03.pdf article talks #
+	#about relationship of pca and svd on pg 3.  Mentions centering cols of X is needed for the #
+	#relationship that we see.#
+#
+#Display PCA information:#
+pca_out #
+summary(pca_out)#
+#
+names(svd_out) #Has {d, u, v} objects. X_mxn = UDV' where U is mxn, D is nxn diagonal, V is nxn. #
+#
+#EIGENVECTORS (rotation, loadings): THESE ARE ALL THE SAME!#
+svd_out$v#
+pca_out$rotation#
+egn_S$vectors#
+#
+#PROPORTIONS OF VARIANCE:#
+summary(pca_out) #Shows proportions of variance.#
+egn_S$value/sum(egn_S$value) #Each eigenvalue / sum of all eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Why is this the case for SVD?  Explanation:#
+svd_out$d #Not eigenvalues, they are proportional to eigenvalues.#
+	#(More efficient to just store diagonal of d as a vector.  D is really diagonal matrix.)#
+svd_out$d^2 #Proportional to variance of principal components, ie the eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Compute the principal components:#
+PC <- scale(X, center=T, scale=F) %*% pca_out$rotation#
+	#New variables we create, which are linear combos of others.#
+head(PC)#
+#
+#Variance of principal components#
+var(PC[,1])#
+egn_S$value #Eigenvalues are variances of the principal components.#
+#This is not an output in SVD, but can get proportions of variance as shown previously.
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)
+dim(X)
+class(X)
+colnames(X) <- c('Sample1', 'Sample2', 'Sample3')
+head(X)
+rownames(X) <- 1:n
+head(X)
+library(MASS)#
+n <- 500; p <- 3#
+#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma,dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3')))#
+#
+## Sample covariance matrix and its eigen-decomposition.#
+S <- var(X)#
+egn_S <- eigen(S)#
+#
+## PCA and SVD.#
+pca_out <- prcomp(X, center = TRUE, scale = FALSE)#
+svd_out <- svd(scale(X, center = TRUE, scale = FALSE))#
+	#The scale function is column-centering the data for the SVD. The wall_03.pdf article talks #
+	#about relationship of pca and svd on pg 3.  Mentions centering cols of X is needed for the #
+	#relationship that we see.#
+#
+#Display PCA information:#
+pca_out #
+summary(pca_out)#
+#
+names(svd_out) #Has {d, u, v} objects. X_mxn = UDV' where U is mxn, D is nxn diagonal, V is nxn. #
+#
+#EIGENVECTORS (rotation, loadings): THESE ARE ALL THE SAME!#
+svd_out$v#
+pca_out$rotation#
+egn_S$vectors#
+#
+#PROPORTIONS OF VARIANCE:#
+summary(pca_out) #Shows proportions of variance.#
+egn_S$value/sum(egn_S$value) #Each eigenvalue / sum of all eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Why is this the case for SVD?  Explanation:#
+svd_out$d #Not eigenvalues, they are proportional to eigenvalues.#
+	#(More efficient to just store diagonal of d as a vector.  D is really diagonal matrix.)#
+svd_out$d^2 #Proportional to variance of principal components, ie the eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Compute the principal components:#
+PC <- scale(X, center=T, scale=F) %*% pca_out$rotation#
+	#New variables we create, which are linear combos of others.#
+head(PC)#
+#
+#Variance of principal components#
+var(PC[,1])#
+egn_S$value #Eigenvalues are variances of the principal components.#
+#This is not an output in SVD, but can get proportions of variance as shown previously.#
+#
+#-------------------------------------------------------------------#
+#SVD: What about the 'u' part?#
+#
+#The U has columns corresponding to eigenvectors for each row, not each col.#
+#ie eigenvectors if asked about structure of rows instead of cols.#
+#The eigenvals are the same for both of those (svd_out$d)#
+#
+#Can recreate original X data using SVD output.#
+X_hat <- svd_out$u %*% diag(svd_out$d) %*% t(svd_out$v)#
+#
+#X centered:#
+X_scaled <- scale(X,center=T,scale=F)#
+#
+#THESE MATCH!#
+head(X_hat)#
+head(X_scaled)#
+#
+#-------------------------------------------------------------------#
+#Consider the rows as the variables (alternate approach):#
+Xt <- t(X)#
+pca_out <- prcomp(Xt, center=T, scale=F)#
+svd_out <- svd(scale(Xt,center=T,scale=F))#
+#
+#And proceed with analysis as described above.
+library(MASS)#
+n <- 500; p <- 3#
+#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- c('Sample1', 'Sample2', 'Sample3')#
+rownames(X) <- 1:n#
+#
+## Sample covariance matrix and its eigen-decomposition.#
+S <- var(X)#
+egn_S <- eigen(S)#
+#
+## PCA and SVD.#
+pca_out <- prcomp(X, center = TRUE, scale = FALSE)#
+svd_out <- svd(scale(X, center = TRUE, scale = FALSE))#
+	#The scale function is column-centering the data for the SVD. The wall_03.pdf article talks #
+	#about relationship of pca and svd on pg 3.  Mentions centering cols of X is needed for the #
+	#relationship that we see.#
+#
+#Display PCA information:#
+pca_out #
+summary(pca_out)#
+#
+names(svd_out) #Has {d, u, v} objects. X_mxn = UDV' where U is mxn, D is nxn diagonal, V is nxn. #
+#
+#EIGENVECTORS (rotation, loadings): THESE ARE ALL THE SAME!#
+svd_out$v#
+pca_out$rotation#
+egn_S$vectors#
+#
+#PROPORTIONS OF VARIANCE:#
+summary(pca_out) #Shows proportions of variance.#
+egn_S$value/sum(egn_S$value) #Each eigenvalue / sum of all eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Why is this the case for SVD?  Explanation:#
+svd_out$d #Not eigenvalues, they are proportional to eigenvalues.#
+	#(More efficient to just store diagonal of d as a vector.  D is really diagonal matrix.)#
+svd_out$d^2 #Proportional to variance of principal components, ie the eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Compute the principal components:#
+PC <- scale(X, center=T, scale=F) %*% pca_out$rotation#
+	#New variables we create, which are linear combos of others.#
+head(PC)
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+#### Some simulations to explore PCA.#
+#
+n <- 500; p <- 5  #Data X will have 500 obs (rows), and 3 subjects (cols).#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 1: Set up IID normal variables.#
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3')))#
+#
+## PCA SIM 1: No "structure," so the components are meaningless "patterns," each given equal #
+## weight in decomposing the sample correlation matrix.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 2: Set up Multivariate normal variables. with correlation structure.#
+library(MASS)#
+mu <- rep(0, p) #Means for the MVN dist.#
+rho <- 0.8 #Correlation value.#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1 #Correlation matrix.#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma,#
+	dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3'))) #Set up mvn data with corr structure.#
+#
+## PCA SIM 2: Is now systematic pattern to the differences between individuals. A large majority of #
+## the variation can be explained by an "index" variable that averages the p variables.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 3: Multivariate normal variables, plus one right-skewed count variable.#
+library(MASS)#
+#
+## Some multivariate normal variables.#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- c('Sample1', 'Sample2', 'Sample3')#
+rownames(X) <- 1:n#
+#
+## A right-skewed count variable.#
+v <- exp(runif(n, 0, log(1e6)))#
+hist(v)#
+#
+## PCA SIM 3: PCA on all of them together. Count variable not viewed as overly informative after #
+## standardization.#
+Y <- cbind(v, X); colnames(Y) <- paste("Y", 1:(p + 1), sep = "_")#
+#
+pca <- prcomp(Y, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+eigen(var(scale(Y, center = TRUE, scale = TRUE)))#
+eigen(cor(Y))#
+#
+## Log transformation does not affect the story.#
+pca_log <- prcomp(cbind(log(v), X), center = TRUE, scale = TRUE)#
+#
+#--------------------------------------------------------------------------------#
+#### Explore relationship between PCA and SVD.#
+#
+library(MASS)#
+#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- c('Sample1', 'Sample2', 'Sample3')#
+rownames(X) <- 1:n#
+#
+## Sample covariance matrix and its eigen-decomposition.#
+S <- var(X)#
+egn_S <- eigen(S)#
+#
+## PCA and SVD.#
+pca_out <- prcomp(X, center = TRUE, scale = FALSE)#
+svd_out <- svd(scale(X, center = TRUE, scale = FALSE))#
+	#The scale function is column-centering the data for the SVD. The wall_03.pdf article talks #
+	#about relationship of pca and svd on pg 3.  Mentions centering cols of X is needed for the #
+	#relationship that we see.#
+#
+#Display PCA information:#
+pca_out #
+summary(pca_out)#
+#
+names(svd_out) #Has {d, u, v} objects. X_mxn = UDV' where U is mxn, D is nxn diagonal, V is nxn. #
+#
+#EIGENVECTORS (rotation, loadings): THESE ARE ALL THE SAME!#
+svd_out$v#
+pca_out$rotation#
+egn_S$vectors#
+#
+#PROPORTIONS OF VARIANCE:#
+summary(pca_out) #Shows proportions of variance.#
+egn_S$value/sum(egn_S$value) #Each eigenvalue / sum of all eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Why is this the case for SVD?  Explanation:#
+svd_out$d #Not eigenvalues, they are proportional to eigenvalues.#
+	#(More efficient to just store diagonal of d as a vector.  D is really diagonal matrix.)#
+svd_out$d^2 #Proportional to variance of principal components, ie the eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Compute the principal components:#
+PC <- scale(X, center=T, scale=F) %*% pca_out$rotation#
+	#New variables we create, which are linear combos of others.#
+head(PC)#
+#
+#Variance of principal components#
+var(PC[,1])#
+egn_S$value #Eigenvalues are variances of the principal components.#
+#This is not an output in SVD, but can get proportions of variance as shown previously.#
+#
+#-------------------------------------------------------------------#
+#SVD: What about the 'u' part?#
+#
+#The U has columns corresponding to eigenvectors for each row, not each col.#
+#ie eigenvectors if asked about structure of rows instead of cols.#
+#The eigenvals are the same for both of those (svd_out$d)#
+#
+#Can recreate original X data using SVD output.#
+X_hat <- svd_out$u %*% diag(svd_out$d) %*% t(svd_out$v)#
+#
+#X centered:#
+X_scaled <- scale(X,center=T,scale=F)#
+#
+#THESE MATCH!#
+head(X_hat)#
+head(X_scaled)#
+#
+#-------------------------------------------------------------------#
+#Consider the rows as the variables (alternate approach):#
+Xt <- t(X)#
+pca_out <- prcomp(Xt, center=T, scale=F)#
+svd_out <- svd(scale(Xt,center=T,scale=F))#
+#
+#And proceed with analysis as described above.#
+#
+#-------------------------------------------------------------------#
+#PLOTTING: How to plot all of this stuff!#
+#
+#SVD:#
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+#### Some simulations to explore PCA.#
+#
+n <- 500; p <- 5  #Data X will have 500 obs (rows), and 3 subjects (cols).#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 1: Set up IID normal variables.#
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3')))#
+#
+## PCA SIM 1: No "structure," so the components are meaningless "patterns," each given equal #
+## weight in decomposing the sample correlation matrix.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 2: Set up Multivariate normal variables. with correlation structure.#
+library(MASS)#
+mu <- rep(0, p) #Means for the MVN dist.#
+rho <- 0.8 #Correlation value.#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1 #Correlation matrix.#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma,#
+	dimnames=list(1:n,c('Sample1', 'Sample2', 'Sample3'))) #Set up mvn data with corr structure.#
+#
+## PCA SIM 2: Is now systematic pattern to the differences between individuals. A large majority of #
+## the variation can be explained by an "index" variable that averages the p variables.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 3: Multivariate normal variables, plus one right-skewed count variable.#
+library(MASS)#
+#
+## Some multivariate normal variables.#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- c('Sample1', 'Sample2', 'Sample3')#
+rownames(X) <- 1:n#
+#
+## A right-skewed count variable.#
+v <- exp(runif(n, 0, log(1e6)))#
+hist(v)#
+#
+## PCA SIM 3: PCA on all of them together. Count variable not viewed as overly informative after #
+## standardization.#
+Y <- cbind(v, X); colnames(Y) <- paste("Y", 1:(p + 1), sep = "_")#
+#
+pca <- prcomp(Y, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+eigen(var(scale(Y, center = TRUE, scale = TRUE)))#
+eigen(cor(Y))#
+#
+## Log transformation does not affect the story.#
+pca_log <- prcomp(cbind(log(v), X), center = TRUE, scale = TRUE)#
+#
+#--------------------------------------------------------------------------------#
+#### Explore relationship between PCA and SVD.#
+#
+library(MASS)#
+#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- c('Sample1', 'Sample2', 'Sample3')#
+rownames(X) <- 1:n#
+#
+## Sample covariance matrix and its eigen-decomposition.#
+S <- var(X)#
+egn_S <- eigen(S)#
+#
+## PCA and SVD.#
+pca_out <- prcomp(X, center = TRUE, scale = FALSE)#
+svd_out <- svd(scale(X, center = TRUE, scale = FALSE))#
+	#The scale function is column-centering the data for the SVD. The wall_03.pdf article talks #
+	#about relationship of pca and svd on pg 3.  Mentions centering cols of X is needed for the #
+	#relationship that we see.#
+#
+#Display PCA information:#
+pca_out #
+summary(pca_out)#
+#
+names(svd_out) #Has {d, u, v} objects. X_mxn = UDV' where U is mxn, D is nxn diagonal, V is nxn. #
+#
+#EIGENVECTORS (rotation, loadings): THESE ARE ALL THE SAME!#
+svd_out$v#
+pca_out$rotation#
+egn_S$vectors#
+#
+#PROPORTIONS OF VARIANCE:#
+summary(pca_out) #Shows proportions of variance.#
+egn_S$value/sum(egn_S$value) #Each eigenvalue / sum of all eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Why is this the case for SVD?  Explanation:#
+svd_out$d #Not eigenvalues, they are proportional to eigenvalues.#
+	#(More efficient to just store diagonal of d as a vector.  D is really diagonal matrix.)#
+svd_out$d^2 #Proportional to variance of principal components, ie the eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Compute the principal components:#
+PC <- scale(X, center=T, scale=F) %*% pca_out$rotation#
+	#New variables we create, which are linear combos of others.#
+head(PC)#
+#
+#Variance of principal components#
+var(PC[,1])#
+egn_S$value #Eigenvalues are variances of the principal components.#
+#This is not an output in SVD, but can get proportions of variance as shown previously.#
+#
+#-------------------------------------------------------------------#
+#SVD: What about the 'u' part?#
+#
+#The U has columns corresponding to eigenvectors for each row, not each col.#
+#ie eigenvectors if asked about structure of rows instead of cols.#
+#The eigenvals are the same for both of those (svd_out$d)#
+#
+#Can recreate original X data using SVD output.#
+X_hat <- svd_out$u %*% diag(svd_out$d) %*% t(svd_out$v)#
+#
+#X centered:#
+X_scaled <- scale(X,center=T,scale=F)#
+#
+#THESE MATCH!#
+head(X_hat)#
+head(X_scaled)#
+#
+#-------------------------------------------------------------------#
+#PLOTTING: How to plot all of this stuff!#
+#
+#SVD:#
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+n <- 500; p <- 5  #Data X will have 500 obs (rows), and 3 subjects (cols).#
+cnames <- paste('Sample',rep(1:p),sep="")
+cnames
+#### Some simulations to explore PCA.#
+#
+n <- 500; p <- 5  #Data X will have 500 obs (rows), and 3 subjects (cols).#
+cnames <- paste('Sample',rep(1:p),sep="") #Set up column names#
+rnames <- 1:n#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 1: Set up IID normal variables.#
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,dimnames=list(rnames,cnames)#
+#
+## PCA SIM 1: No "structure," so the components are meaningless "patterns," each given equal #
+## weight in decomposing the sample correlation matrix.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+#--------------------------------------------------------------------------------#
+## DATA SETUP 2: Set up Multivariate normal variables. with correlation structure.#
+library(MASS)#
+mu <- rep(0, p) #Means for the MVN dist.#
+rho <- 0.8 #Correlation value.#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1 #Correlation matrix.#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma, dimnames=list(rnames,cnames) #Set up mvn data with corr structure.#
+#
+## PCA SIM 2: Is now systematic pattern to the differences between individuals. A large majority of #
+## the variation can be explained by an "index" variable that averages the p variables.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)
+## DATA SETUP 1: Set up IID normal variables.#
+X <- matrix(rnorm(n * p), nrow = n, ncol = p,dimnames=list(rnames,cnames))#
+#
+## PCA SIM 1: No "structure," so the components are meaningless "patterns," each given equal #
+## weight in decomposing the sample correlation matrix.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)
+#--------------------------------------------------------------------------------#
+## DATA SETUP 2: Set up Multivariate normal variables. with correlation structure.#
+library(MASS)#
+mu <- rep(0, p) #Means for the MVN dist.#
+rho <- 0.8 #Correlation value.#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1 #Correlation matrix.#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma, dimnames=list(rnames,cnames)) #Set up mvn data with corr structure.#
+#
+## PCA SIM 2: Is now systematic pattern to the differences between individuals. A large majority of #
+## the variation can be explained by an "index" variable that averages the p variables.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)
+## DATA SETUP 2: Set up Multivariate normal variables. with correlation structure.#
+library(MASS)#
+mu <- rep(0, p) #Means for the MVN dist.#
+rho <- 0.8 #Correlation value.#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1 #Correlation matrix.#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma) #Set up mvn data with corr structure.#
+colnames(X) <- cnames#
+rownames(X) <- rnames#
+#
+## PCA SIM 2: Is now systematic pattern to the differences between individuals. A large majority of #
+## the variation can be explained by an "index" variable that averages the p variables.#
+pca <- prcomp(X, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)
+cnames <- paste('Sample',1:p,sep="") #Set up column names#
+rnames <- paste('gene',1:n,sep="")
+cnames
+head(rnames)
+## Some multivariate normal variables.#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- cnames#
+rownames(X) <- rnames#
+#
+## A right-skewed count variable.#
+v <- exp(runif(n, 0, log(1e6)))#
+hist(v)#
+#
+## PCA SIM 3: PCA on all of them together. Count variable not viewed as overly informative after #
+## standardization.#
+Y <- cbind(v, X); colnames(Y) <- paste("Y", 1:(p + 1), sep = "_")#
+#
+pca <- prcomp(Y, center = TRUE, scale = TRUE)#
+pca#
+summary(pca)#
+#
+eigen(var(scale(Y, center = TRUE, scale = TRUE)))#
+eigen(cor(Y))#
+#
+## Log transformation does not affect the story.#
+pca_log <- prcomp(cbind(log(v), X), center = TRUE, scale = TRUE)
+#SVD:#
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20,xaxt='n')#
+axis(1,cnames)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20,xaxt='n')#
+axis(1,length(cnames),cnames)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+?axis
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 1))#
+plot(svd_out$v[, 1], pch = 20,xaxt='n')#
+axis(side=1,at=1:length(cnames),label=cnames)#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 2))#
+#
+plot(svd_out$v[, 1], pch = 20,xaxt='n')#
+axis(side=1,at=1:length(cnames),label=cnames) #Set x-axis sample labels.#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.#
+#
+plot(svd_out$v[, 2], pch = 20,xaxt='n')#
+axis(side=1,at=1:length(cnames),label=cnames) #Set x-axis sample labels.#
+lines(svd_out$v[, 2]) #Plotting the 1st eigenvector.
+plot(pca_out)
+plot(pca_out,type='l')#
+axis(side=1,at=1:length(cnames),label=cnames) #Set x-axis sample labels.
+plot(pca_out,type='l',xaxt='n')#
+axis(side=1,at=1:length(cnames),label=cnames) #Set x-axis sample labels.
+plot(pca_out,type='l',xaxt='n')
+plot(pca_out$rotation[,1],pca_out$roation[,2])
+summary(pca_out)
+pca_out
+library(MASS)#
+#
+mu <- rep(0, p)#
+rho <- 0.8#
+Sigma <- matrix(rho, nrow = p, ncol = p); diag(Sigma) <- 1#
+X <- mvrnorm(n, mu = mu, Sigma = Sigma)#
+colnames(X) <- cnames; rownames(X) <- rnames#
+#
+## Sample covariance matrix and its eigen-decomposition.#
+S <- var(X)#
+egn_S <- eigen(S)#
+#
+## PCA and SVD.#
+pca_out <- prcomp(X, center = TRUE, scale = FALSE)#
+svd_out <- svd(scale(X, center = TRUE, scale = FALSE))#
+	#The scale function is column-centering the data for the SVD. The wall_03.pdf article talks #
+	#about relationship of pca and svd on pg 3.  Mentions centering cols of X is needed for the #
+	#relationship that we see.#
+#
+#Display PCA information:#
+pca_out #
+summary(pca_out)#
+#
+names(svd_out) #Has {d, u, v} objects. X_mxn = UDV' where U is mxn, D is nxn diagonal, V is nxn. #
+#
+#EIGENVECTORS (rotation, loadings): THESE ARE ALL THE SAME!#
+svd_out$v#
+pca_out$rotation#
+egn_S$vectors#
+#
+#PROPORTIONS OF VARIANCE:#
+summary(pca_out) #Shows proportions of variance.#
+egn_S$value/sum(egn_S$value) #Each eigenvalue / sum of all eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Why is this the case for SVD?  Explanation:#
+svd_out$d #Not eigenvalues, they are proportional to eigenvalues.#
+	#(More efficient to just store diagonal of d as a vector.  D is really diagonal matrix.)#
+svd_out$d^2 #Proportional to variance of principal components, ie the eigenvalues.#
+svd_out$d^2/ sum(svd_out$d) #Proportion of variances output in SVD.#
+#
+#Compute the principal components:#
+PC <- scale(X, center=T, scale=F) %*% pca_out$rotation#
+	#New variables we create, which are linear combos of others.#
+head(PC)#
+#
+#Variance of principal components#
+var(PC[,1])#
+egn_S$value #Eigenvalues are variances of the principal components.#
+#This is not an output in SVD, but can get proportions of variance as shown previously.#
+#
+#-------------------------------------------------------------------#
+#SVD: What about the 'u' part?#
+#
+#The U has columns corresponding to eigenvectors for each row, not each col.#
+#ie eigenvectors if asked about structure of rows instead of cols.#
+#The eigenvals are the same for both of those (svd_out$d)#
+#
+#Can recreate original X data using SVD output.#
+X_hat <- svd_out$u %*% diag(svd_out$d) %*% t(svd_out$v)#
+#
+#X centered:#
+X_scaled <- scale(X,center=T,scale=F)#
+#
+#THESE MATCH!#
+head(X_hat)#
+head(X_scaled)#
+#
+#-------------------------------------------------------------------#
+#PLOTTING: How to plot all of this stuff!#
+#
+#SVD:#
+#Plot the first two eigenvectors to look for patterns.#
+par(mfrow = c(1, 2))#
+#
+plot(svd_out$v[, 1], pch = 20,xaxt='n')#
+axis(side=1,at=1:length(cnames),label=cnames) #Set x-axis sample labels.#
+lines(svd_out$v[, 1]) #Plotting the 1st eigenvector.#
+#
+plot(svd_out$v[, 2], pch = 20,xaxt='n')#
+axis(side=1,at=1:length(cnames),label=cnames) #Set x-axis sample labels.#
+lines(svd_out$v[, 2]) #Plotting the 1st eigenvector.#
+#
+#PCA:#
+plot(pca_out,type='l',xaxt='n') #Shows how many principal components are important.#
+#
+#Scatter plot the first two principal components to look for groups.#
+plot(pca_out$rotation[,1],pca_out$roation[,2])#
+#
+#Look at rotations to see what variables are contributing significantly to each princ component.#
+summary(pca_out)#
+pca_out
+## EXPLORATORY DATA ANALYSIS: PCA, Testing, SVD, Clustering#
+#
+#Microarray -omics data.#
+#
+#####
+#### Gene expression data from GEO (dataset GDS4506). Summary: "Analysis of liver #
+#### endoplasmic reticulum (ER)-associated polysomes from leptin deficient (ob/ob) males #
+#### after overnight fasting. The liver is critical for metabolic homeostasis. Results #
+#### provide insight into molecular mechanisms underlying changes in protein metabolism #
+#### caused by obesity and diabetes."#
+#####
+#
+#####
+#### Samples 1-5 are from obese mice, samples 6-10 are from lean mice. The first 2 samples #
+#### within each obese / lean group were subjected to fasting the night prior to assay.#
+####  (Two factors!  Obesity and feeding status.)#
+#
+#(Each mouse has two variables to describe systematic differences: Obese vs lean (ol), #
+#and Fasting vs Not Fast (fast vs adlib, the fa var below).#
+#
+# Look at actual soft file for meta.  We set it up in colnames(Y) below, in row 32.#
+#
+setwd('/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays')#
+data = read.delim("GDS4506 (mouse liver).soft", skip = 57)[-45102, ]#
+gene_id = data[, 1:2]#
+Y = log2(data[, -c(1:2)])#
+#
+#These factors describe the meta for each column, ie levels of each variable.#
+ol = factor(rep(c("obese", "lean"), each = 5))#
+fa = factor(rep(c("fast", "fast", "adlib", "adlib", "adlib"), 2))#
+#
+colnames(Y) = c("ob_fa_1", "ob_fa_2", "ob_al_1", "ob_al_2", "ob_al_3", "le_fa_1", #
+  "le_fa_2", "le_al_1", "le_al_2", "le_al_3")#
+m = nrow(Y) #Number of features.#
+n = 10		#Number of individuals.#
+#
+#Note: Y has one row with missing values.  We'll handle it later.#
+#
+#-----------------------------------------------------------------------------#
+#####
+#### EDA. (Exploratory Data Analysis)#
+#####
+#
+# Simplest thing to do with a data set is make a picture.  Then compute some summary stats.#
+# LOOK AT YOUR DATA!#
+#
+## Side-by-side boxplots. These data have likely already been subjected to some kind of #
+## normalization. Raw data would not likely line up in such a pretty way.#
+boxplot(Y)  #Point of normalization is to remove systematic technical variation.#
+#
+#-----------------------------------------------------------------------------#
+## Clustering. While there looks to be 2 clusters, there is not an obvious "story" to the #
+## picture. In particular, the samples don't obviously cluster by comparison group. One #
+## cluster is samples 5, 7, and 10. #
+#Transposing Y bc looking at structure among individuals, not genes.#
+HC = hclust(dist(t(Y)), method = "complete") #Using euclidian distance (default).#
+par(mfrow = c(1, 2))#
+plot(HC) #Dendrogram.  Looks like 2 clusters.  (Top point represents height of top merge.  #
+	#Look for groups of distances.  The jump from the top point to the second-heighest point#
+	#is a huge jump.)#
+	#Why do we not count a big middle jump as a separate cluser?  Bc we would have to consider every merge #
+	#with a higher height as its own cluster then, which doesn't look realistic on the dendrogram.#
+	#This is like drawing a horizontal line on the dendrogram, where everything not joined at this#
+	#point is in its own cluster.  Read scree plot and dendrogram together!  Doesn't look realistic#
+	#when you look at the dendrogram.#
+	#Picking a height on the dendrogram , you can get the number of clusters based on the # of points#
+	#below the point you selected as individual clusters.#
+	#IN SHORT: On scree, you look for a height where there is a noticeable jump to get to it, AND#
+	#a noticeable jump for every point higher than the chosen point.  Err on the side of not #
+	#over-interpreting; err on the side of calling it fewer clusters.#
+plot(HC$height) #Scree plot#
+#
+#So it looks like we have these three which are different from others:#
+# 1. Obese - adlib eating#
+# 2. Lean - fasting#
+# 3. Lean - adlib eating.#
+#
+#No cute story or easy pattern with these.  Could go to PI, and say that there aren't#
+#overwhelming differences between obese/lean and between fasting/adlib.  Could find out these#
+#were all run one week, and others were all run a different week, or a technician problem.#
+#(If data doesn't look like you expect, does it suggest something different?  In this case, yes!#
+#Would want to know about these 3 samples.  Might even need to remove them, if they aren't#
+#comparable to the rest.  Then perhaps the structure we expect to see will pop up.)#
+#If you can't find something to distinguish them, keep them - don't just throw them out bc they throw#
+#the picture off from looking like you expect.  Must have systematic argument to discard them.#
+#Then you might start thinking about technical limitations of the technology.  Measurement issue?#
+#Some kind of unobserved covariate that is important?  Gender?#
+#Would not submit this picture to a journal on its own!  This is a fuzzy pic of a data set.#
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+## Looking at one example specifically: Sample 5 is the 3rd mouse in the obese / adlib #
+## group. According to the clustering results, this mouse differs from the other 2 mice #
+## in this group. Let's make MA plots comparing the 1st and 2nd mice in this group (which #
+## are apparently similar to one another) and comparing the 1st and 3rd mice in this #
+## group.#
+###
+## The first plot shows virtually no systematic deviation from the ideal horizontal line #
+## of equality. The second plot shows systematic deviation for low expression genes. #
+## Perhaps this is intensity-dependent bias between the arrays, and perhaps this bias is #
+## what drives the clustering results.#
+A_12 <- (Y[, "ob_al_1"] + Y[, "ob_al_2"]) / 2#
+M_12 <- Y[, "ob_al_2"] - Y[, "ob_al_1"]#
+plot(A_12, M_12, pch = 20, col = "grey", ylim = c(-6, 6))#
+abline(0, 0, lwd = 2, lty = 2)#
+lines(lowess(A_12, M_12), lwd = 2, col = "blue")#
+#
+A_13 <- (Y[, "ob_al_1"] + Y[, "ob_al_3"]) / 2#
+M_13 <- Y[, "ob_al_3"] - Y[, "ob_al_1"]#
+plot(A_13, M_13, pch = 20, col = "grey", ylim = c(-6, 6))#
+abline(0, 0, lwd = 2, lty = 2)#
+lines(lowess(A_13, M_13), lwd = 2, col = "blue")#
+#
+#-----------------------------------------------------------------------------#
+#Principal Components Analysis:#
+#
+#Remember to standardize variables if you are working with vars of different scale!#
+#Otherwise, one variable might swamp the others.  (This way all vars have same mu & sd.)#
+#Doesn't matter here, bc these always have same scale.  But we will do it anyways.#
+pca <- prcomp(na.omit(Y),center=T, scale=T) #Need to remove the NA rows.#
+#
+summary(pca)#
+	#Is there structure in the data? YES! Looks like the first principal component explains#
+	#90% of the variation in the data set.#
+#
+#How to interpret?  Let's look at coefficients that define PC1.#
+pca	#
+#All PC1 coeffs are about same - this is a typical 'index-like' PC, there is lots of corr between vars.#
+#It basically says 'yes, these are all correlated'.#
+#But there is no contrast or good story here, other than all the vars are important.#
+#Not a whole lot of structure, other than just the fact that the vars are correlated.#
+#This analysis doesn't highlight the three features we saw clustered, so we're not so worried about#
+#those three individuals now.  We aren't worried about them standing out.#
+#Aside: What does it look like if there is no structure in the data?#
+xx <- matrix(rnorm(1000*3),nrow=1000,ncol=3)#
+pca <- prcomp(xx,center=T,scale=T)#
+summary(pca)#
+	#The proportion of variance is about even!  There is no component that explains substantially#
+	#more of the variation than any of the other principal components.
+## EXPLORATORY DATA ANALYSIS: PCA, Testing, SVD, Clustering#
+#
+#Microarray -omics data.#
+#
+#####
+#### Gene expression data from GEO (dataset GDS4506). Summary: "Analysis of liver #
+#### endoplasmic reticulum (ER)-associated polysomes from leptin deficient (ob/ob) males #
+#### after overnight fasting. The liver is critical for metabolic homeostasis. Results #
+#### provide insight into molecular mechanisms underlying changes in protein metabolism #
+#### caused by obesity and diabetes."#
+#####
+#
+#####
+#### Samples 1-5 are from obese mice, samples 6-10 are from lean mice. The first 2 samples #
+#### within each obese / lean group were subjected to fasting the night prior to assay.#
+####  (Two factors!  Obesity and feeding status.)#
+#
+#(Each mouse has two variables to describe systematic differences: Obese vs lean (ol), #
+#and Fasting vs Not Fast (fast vs adlib, the fa var below).#
+#
+# Look at actual soft file for meta.  We set it up in colnames(Y) below, in row 32.#
+#
+setwd('/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays')#
+data = read.delim("GDS4506 (mouse liver).soft", skip = 57)[-45102, ]#
+gene_id = data[, 1:2]#
+Y = log2(data[, -c(1:2)])#
+#
+#These factors describe the meta for each column, ie levels of each variable.#
+ol = factor(rep(c("obese", "lean"), each = 5))#
+fa = factor(rep(c("fast", "fast", "adlib", "adlib", "adlib"), 2))#
+#
+colnames(Y) = c("ob_fa_1", "ob_fa_2", "ob_al_1", "ob_al_2", "ob_al_3", "le_fa_1", #
+  "le_fa_2", "le_al_1", "le_al_2", "le_al_3")#
+m = nrow(Y) #Number of features.#
+n = 10		#Number of individuals.#
+#
+#Note: Y has one row with missing values.  We'll handle it later.#
+#
+#-----------------------------------------------------------------------------#
+#####
+#### EDA. (Exploratory Data Analysis)#
+#####
+#
+# Simplest thing to do with a data set is make a picture.  Then compute some summary stats.#
+# LOOK AT YOUR DATA!#
+#
+## Side-by-side boxplots. These data have likely already been subjected to some kind of #
+## normalization. Raw data would not likely line up in such a pretty way.#
+boxplot(Y)  #Point of normalization is to remove systematic technical variation.#
+#
+#-----------------------------------------------------------------------------#
+## Clustering. While there looks to be 2 clusters, there is not an obvious "story" to the #
+## picture. In particular, the samples don't obviously cluster by comparison group. One #
+## cluster is samples 5, 7, and 10. #
+#Transposing Y bc looking at structure among individuals, not genes.#
+HC = hclust(dist(t(Y)), method = "complete") #Using euclidian distance (default).#
+par(mfrow = c(1, 2))#
+plot(HC) #Dendrogram.  Looks like 2 clusters.  (Top point represents height of top merge.  #
+	#Look for groups of distances.  The jump from the top point to the second-heighest point#
+	#is a huge jump.)#
+	#Why do we not count a big middle jump as a separate cluser?  Bc we would have to consider every merge #
+	#with a higher height as its own cluster then, which doesn't look realistic on the dendrogram.#
+	#This is like drawing a horizontal line on the dendrogram, where everything not joined at this#
+	#point is in its own cluster.  Read scree plot and dendrogram together!  Doesn't look realistic#
+	#when you look at the dendrogram.#
+	#Picking a height on the dendrogram , you can get the number of clusters based on the # of points#
+	#below the point you selected as individual clusters.#
+	#IN SHORT: On scree, you look for a height where there is a noticeable jump to get to it, AND#
+	#a noticeable jump for every point higher than the chosen point.  Err on the side of not #
+	#over-interpreting; err on the side of calling it fewer clusters.#
+plot(HC$height) #Scree plot#
+#
+#So it looks like we have these three which are different from others:#
+# 1. Obese - adlib eating#
+# 2. Lean - fasting#
+# 3. Lean - adlib eating.#
+#
+#No cute story or easy pattern with these.  Could go to PI, and say that there aren't#
+#overwhelming differences between obese/lean and between fasting/adlib.  Could find out these#
+#were all run one week, and others were all run a different week, or a technician problem.#
+#(If data doesn't look like you expect, does it suggest something different?  In this case, yes!#
+#Would want to know about these 3 samples.  Might even need to remove them, if they aren't#
+#comparable to the rest.  Then perhaps the structure we expect to see will pop up.)#
+#If you can't find something to distinguish them, keep them - don't just throw them out bc they throw#
+#the picture off from looking like you expect.  Must have systematic argument to discard them.#
+#Then you might start thinking about technical limitations of the technology.  Measurement issue?#
+#Some kind of unobserved covariate that is important?  Gender?#
+#Would not submit this picture to a journal on its own!  This is a fuzzy pic of a data set.#
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+## Looking at one example specifically: Sample 5 is the 3rd mouse in the obese / adlib #
+## group. According to the clustering results, this mouse differs from the other 2 mice #
+## in this group. Let's make MA plots comparing the 1st and 2nd mice in this group (which #
+## are apparently similar to one another) and comparing the 1st and 3rd mice in this #
+## group.#
+###
+## The first plot shows virtually no systematic deviation from the ideal horizontal line #
+## of equality. The second plot shows systematic deviation for low expression genes. #
+## Perhaps this is intensity-dependent bias between the arrays, and perhaps this bias is #
+## what drives the clustering results.#
+A_12 <- (Y[, "ob_al_1"] + Y[, "ob_al_2"]) / 2#
+M_12 <- Y[, "ob_al_2"] - Y[, "ob_al_1"]#
+plot(A_12, M_12, pch = 20, col = "grey", ylim = c(-6, 6))#
+abline(0, 0, lwd = 2, lty = 2)#
+lines(lowess(A_12, M_12), lwd = 2, col = "blue")#
+#
+A_13 <- (Y[, "ob_al_1"] + Y[, "ob_al_3"]) / 2#
+M_13 <- Y[, "ob_al_3"] - Y[, "ob_al_1"]#
+plot(A_13, M_13, pch = 20, col = "grey", ylim = c(-6, 6))#
+abline(0, 0, lwd = 2, lty = 2)#
+lines(lowess(A_13, M_13), lwd = 2, col = "blue")#
+#
+#-----------------------------------------------------------------------------#
+#Principal Components Analysis:#
+#
+#Remember to standardize variables if you are working with vars of different scale!#
+#Otherwise, one variable might swamp the others.  (This way all vars have same mu & sd.)#
+#Doesn't matter here, bc these always have same scale.  But we will do it anyways.#
+pca <- prcomp(na.omit(Y),center=T, scale=T) #Need to remove the NA rows.#
+#
+summary(pca)#
+	#Is there structure in the data? YES! Looks like the first principal component explains#
+	#90% of the variation in the data set.#
+#
+#How to interpret?  Let's look at coefficients that define PC1.#
+pca	#
+#All PC1 coeffs are about same - this is a typical 'index-like' PC, there is lots of corr between vars.#
+#It basically says 'yes, these are all correlated'.#
+#But there is no contrast or good story here, other than all the vars are important.#
+#Not a whole lot of structure, other than just the fact that the vars are correlated.#
+#This analysis doesn't highlight the three features we saw clustered, so we're not so worried about#
+#those three individuals now.  We aren't worried about them standing out.#
+#Aside: What does it look like if there is no structure in the data?#
+xx <- matrix(rnorm(1000*3),nrow=1000,ncol=3)#
+pca <- prcomp(xx,center=T,scale=T)#
+summary(pca)#
+	#The proportion of variance is about even!  There is no component that explains substantially#
+	#more of the variation than any of the other principal components.#
+#
+#-----------------------------------------------------------------------------#
+## SVD. Perhaps one eigengene of real substance, accounting for 18% of the variance. The #
+## trend indicates differences in samples 5, 7, and 10. These are the same samples that #
+## clustered together above. #
+#
+#SVD works with a rectangular mxn matrix.  (pxn)  Can decompose a rectangular matrix in an informative#
+#way.  Y=UDV'  (U is mxn, D is nxn diagonal, V is nxn)#
+#
+#Basically you decompose the rectangular matrix into 3 components.  #
+#D consists of eigenvalues on diagonal.  Same values you'd get from PCA.#
+#Cols of V contain eigenvectors, same values you'd get as coeffs of PCA.#
+#Cols of U contain eigenvectors for the features, not the individuals.  #
+	#(Covar matrix eigenvectors for features, not indivs.)#
+#SVD doesn't give you anythign special PCA doesn't, is nice it can be applied to rectangular matrix.#
+#Nice that it gives you eigenvecs for both individuals and features; might be interested in both.#
+#But are essentially doing the exact same thing.#
+#
+SVD = svd(t(scale(t(na.omit(Y)), center = T, scale = F)))#
+round(SVD$d ^ 2 / sum(SVD$d ^ 2), 2)#
+#
+par(mfrow = c(1, 1))#
+plot(SVD$v[, 1], pch = 20)#
+lines(SVD$v[, 1]) #Plotting the 1st eigenvector.#
+	#This picture can show structure in data by plotting coefficients for first eigenvector#
+	#for each subject.  Can make this type of plot for PCA also.#
+	#This particular plot doesn't show much of a story, all over the place.#
+	#Can also do a scatter plot of the PC1 vs PC2 principal components, to show groupings.#
+	#Could do this with PC1, 2 and 3 - as a 3D scatter plot.#
+par(mfrow=c(1,2))#
+plot(SVD$v[,1], SVD$v[,2])#
+#
+S <- var(na.omit(Y))#
+eigs <- eigen(S)#
+pca <- prcomp(na.omit(Y),center=T, scale=T)#
+plot(pca$rotation[,1],pca$rotation[,2])#
+#
+#----------------------------------------------------------------------------------#
+#Now want to filter out genes based on whether or not they look interesting.#
+#Is there a difference for gene i for obese vs not?#
+#Is there a difference for gene i for fasting vs not?#
+#
+#We will look at the fasting question here, controlling for obesity:#
+#H0: No effect of fasting on gene, when controlling for obesity.#
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#REGRESSION MODEL SETUP: #
+#y_ij = intensity level for gene i, sample j.#
+# i goes from 1:45000, j from 1:10.#
+#
+#y_ij = B0 + B1*F_i + B2*O_i + B3*F_i*O_i + e_ij#
+#F_i = 1 for Fasting, 0 for not.#
+#O_i = 1 for Obese, 0 for Lean.#
+#
+#Both are categorical variables.#
+#B1 is mean difference in expression level for a fasting mouse vs non-fasting mouse, among #
+#mice with same obesity value.  (Adjusted for obesity.)  (Difference in means.)#
+#
+#So we want to test whether B1=0.  (H0:B1=0, and if H0 holds, B1 not interesting in terms #
+#of fasting response.)#
+#
+#This model says fasting effect is same for lean and obese mice - no interaction term if B3=0.#
+#If B3 nonzero, fasting effect is allowed to differ for two groups, lean vs obese.#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#
+## A volcano plot is a plot of log_2(fold change) on the horizontal axis vs. #
+## -log_10(p-value) on the vertical axis. It is a quick visual check of which features #
+## are differentially expressed (i.e., interesting). Such features will be located in the #
+## top left or top right of the figure, corresponding to features with both large fold #
+## change and small p-value. We'll test for differences between fasting and no-fasting, #
+## adjusted for obese vs. lean status. For the fold change, we'll just compute fold #
+## change of fasting vs. no-fasting, without regard for obese vs. lean status. #
+#
+#Test if there is a fasting effect:#
+lfc = pvals = rep(NA, m)#
+Y = as.matrix(Y)#
+for(i in 1:m) {#
+  if(i - (i %/% 1000) * 1000 == 0)#
+    cat(i / 1000)#
+#
+  lfc[i] = mean(Y[i, c(1:2, 6:7)]) - mean(Y[i, c(3:5, 8:10)])#
+  fit_i = lm(Y[i, ] ~ ol + fa + ol * fa) #Fitting linear model described above in REGRESSION MODEL SETUP.#
+  fit_i_0 = lm(Y[i, ] ~ ol) #Null model, where H0: F_i = 0.#
+  ava_i = anova(fit_i_0, fit_i)  #Compares whether the two models are the same.  LR Test.  (F-Test)#
+  pvals[i] = ava_i$Pr[2]#
+}#
+#
+## Highlighting 3 genes worth looking at based on the volcano plot. I also highlight the #
+## point for the Cyp7b1 gene; this gene was mentioned as differentially expressed in the #
+## publication for this data set.#
+plot(lfc, -log10(pvals))#
+idx = (1:m)[lfc < -2 & -log10(pvals) > 4.1]#
+points(lfc[idx], -log10(pvals)[idx], pch = 20, col = "red")#
+gene_id[idx, ]#
+#
+points(lfc[5380], -log10(pvals)[5380], pch = 20, col = "green")#
+#
+## Not much "signal." Could just be due to low sample size.#
+hist(pvals, prob = TRUE)#
+abline(1.0, 0, lty = 2, col = "red")
+hh = hist(pvals, prob = TRUE)#
+abline(1, 0, lty = 2)
+boxplot(data[, 1], data[, 2], data[, 3], data[, 4], data[, 5], data[, 6])
+setwd("/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays")#
+data = read.delim("GDS3823 (arabidopsis).soft", skip = 43)[-22855, ]#
+gene_id = data[, 2]
+head(data)
+data = log2(as.matrix(data[, -c(1:2)]))#
+m = nrow(data)#
+#
+colnames(data) = c("A_1", "A_2", "A_3", "AB_1", "AB_2", "AB_3")#
+#
+## The last row is all missing values. Get rid of it.#
+data = data[-22811, ]#
+table(is.na(data))#
+#
+m = nrow(data)#
+n = 6#
+#
+#---------------------------------------------------------------------------------#
+#####
+#### EDA. (Exploratory Data Analysis)#
+#####
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+## Side-by-side boxplots.#
+boxplot(data[, 1], data[, 2], data[, 3], data[, 4], data[, 5], data[, 6])#
+	#Look immaculate, bet has been processed/normalized already somehow.
+boxplot(data[,1:6])
+## Load data.#
+setwd("/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays")#
+data = read.delim("GDS3823 (arabidopsis).soft", skip = 43)[-22855, ]#
+gene_id = data[, 2]#
+data = log2(as.matrix(data[, -c(1:2)]))#
+m = nrow(data)#
+#
+colnames(data) = c("A_1", "A_2", "A_3", "AB_1", "AB_2", "AB_3")#
+#
+## The last row is all missing values. Get rid of it.#
+data = data[-22811, ]#
+table(is.na(data))#
+#
+m = nrow(data)#
+n = 6
+m
+head(data)
+head(gene_id)
+boxplot(data[,1:6])	#Another easy way, and this way shows col labels!
+HC = hclust(dist(t(data)), method = "complete")#
+par(mfrow = c(1, 2))#
+plot(HC)#
+plot(HC$height)
+SVD = svd(t(scale(t(data), center = T, scale = F)))#
+round(SVD$d ^ 2 / sum(SVD$d ^ 2), 2)#
+#
+par(mfrow = c(1, 1))#
+plot(SVD$v[, 1], type = "l", col = "blue", lwd = 2, ylab = "Eigengene coeff.")
+par(mfrow = c(1, 1))#
+plot(SVD$v[, 1], type = "l", col = "blue", lwd = 2, ylab = "Eigengene coeff.",#
+	xaxt='n')#
+axis(side=1,at=1:n,labels=colnames(data))
+lfc = pvals = rep(NA, m) #Vector to hold mean differences in two samples; vector to hold p-values.#
+#
+for(i in 1:m) {#
+  #lfc holds mu_Diff = (mu_A - mu_AB) for each gene.#
+  lfc[i] = mean(data[i, 1:3]) - mean(data[i, 4:6]) #
+  pvals[i] = t.test(data[i, 1:3], data[i, 4:6])$p.value #2-sided t-test, H0: mu_diff=0.#
+}
+hist(pvals)
+qvals <- p.adjust(pvals,method='fdr')
+qvals
+hist(qvals)
+table(qvals<=.05)
+plot(lfc, -log10(pvals), col = "grey", xlab = expression(log[2](FC)), #
+  ylab = expression(log[10](p-value)))#
+idx = c((1:m)[lfc < -3 & -log10(pvals) > 4], (1:m)[-log10(pvals) > 5])#
+points(lfc[idx], -log10(pvals)[idx], pch = 20, col = "red")#
+gene_id[idx]
+plot(lfc, -log10(pvals), col = "grey", xlab = expression(log[2](FC)), #
+  ylab = expression(log[10](p-value)))#
+idx = c((1:m)[lfc < -3 & -log10(pvals) > 4], (1:m)[-log10(pvals) > 5])#
+points(lfc[idx], -log10(pvals)[idx], pch = 20, col = "red")#
+gene_id[idx]
+idx = (1:m)[match("DWF4", gene_id)]#
+points(lfc[idx], -log10(pvals)[idx])#
+points(lfc[idx], -log10(pvals)[idx], pch = 20, col = "blue")
+plot(lfc, -log10(pvals), col = "grey", xlab = expression(log[2](FC)), #
+  ylab = expression(log[10](p-value)))#
+idx = c((1:m)[lfc < -3 & -log10(pvals) > 4], (1:m)[-log10(pvals) > 5]) #Shows the four red genes#
+points(lfc[idx], -log10(pvals)[idx], pch = 20, col = "red")#
+gene_id[idx]#
+#
+## DWF4 is the DWARF4 gene. Where is it in the volcano plot?#
+idx = (1:m)[match("DWF4", gene_id)]#
+points(lfc[idx], -log10(pvals)[idx])#
+points(lfc[idx], -log10(pvals)[idx], pch = 20, col = "blue")
+i=1
+xbar_1 = mean(data_quan[i, 1:3])#
+  xbar_2 = mean(data_quan[i, 4:6])
+pvals = rep(NA, m)#
+data_quan <- data
+xbar_1 = mean(data_quan[i, 1:3])#
+  xbar_2 = mean(data_quan[i, 4:6])#
+  tt = t.test(data_quan[i, 1:3], data_quan[i, 4:6])$statistic
+xbar_1
+xbar_2
+tt
+## EXPLORATORY DATA ANALYSIS: PCA, Testing, SVD, Clustering#
+#
+#Two 2-level categorical variables: Obese/Lean and Fast/Assay (Assay = Non-fasting)#
+#ol = Obese/Lean, fa = Fast/Assay#
+#Interested in analyzing the effect of fasting, controlling for obesity.#
+#
+#---------------------------------------------------------------------------------#
+#INTRO TO DATA:#
+#
+setwd("/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays")#
+#Microarray -omics data.#
+#
+#### Gene expression data from GEO (dataset GDS4506). Summary: "Analysis of liver #
+#### endoplasmic reticulum (ER)-associated polysomes from leptin deficient (ob/ob) males #
+#### after overnight fasting. The liver is critical for metabolic homeostasis. Results #
+#### provide insight into molecular mechanisms underlying changes in protein metabolism #
+#### caused by obesity and diabetes."#
+#
+#### Samples 1-5 are from obese mice, samples 6-10 are from lean mice. The first 2 samples #
+#### within each obese / lean group were subjected to fasting the night prior to assay.#
+####  (Two factors!  Obesity and feeding status.)#
+#
+#(Each mouse has two variables to describe systematic differences: Obese vs lean (ol), #
+#and Fasting vs Not Fast (fast vs adlib, the fa var below).#
+#
+#---------------------------------------------------------------------------------#
+### DATA SETUP: Load data.#
+#
+setwd("/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays")#
+#
+# Look at actual soft file for meta.  We set it up in colnames(Y) below, in row 32.#
+#
+setwd('/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays')#
+data = read.delim("GDS4506 (mouse liver).soft", skip = 57)[-45102, ]#
+gene_id = data[, 1:2]#
+Y = log2(data[, -c(1:2)])#
+#
+#These factors describe the meta for each column, ie levels of each variable.#
+ol = factor(rep(c("obese", "lean"), each = 5))#
+fa = factor(rep(c("fast", "fast", "adlib", "adlib", "adlib"), 2))#
+#
+colnames(Y) = c("ob_fa_1", "ob_fa_2", "ob_al_1", "ob_al_2", "ob_al_3", "le_fa_1", #
+  "le_fa_2", "le_al_1", "le_al_2", "le_al_3")
+m = nrow(Y) #Number of features.#
+n = 10		#Number of individuals.#
+#
+#Note: Y has one row with missing values.  We'll handle it later.
+head(Y)
+#Transposing Y bc looking at structure among individuals, not genes.#
+HC = hclust(dist(t(Y)), method = "complete") #Using euclidian distance (default).#
+par(mfrow = c(1, 2))#
+plot(HC) #Dendrogram.  Looks like 2 clusters.  (Top point represents height of top merge.  #
+	#Look for groups of distances.  The jump from the top point to the second-heighest point#
+	#is a huge jump.)#
+	#Why do we not count a big middle jump as a separate cluser?  Bc we would have to consider every merge #
+	#with a higher height as its own cluster then, which doesn't look realistic on the dendrogram.#
+	#This is like drawing a horizontal line on the dendrogram, where everything not joined at this#
+	#point is in its own cluster.  Read scree plot and dendrogram together!  Doesn't look realistic#
+	#when you look at the dendrogram.#
+	#Picking a height on the dendrogram , you can get the number of clusters based on the # of points#
+	#below the point you selected as individual clusters.#
+	#IN SHORT: On scree, you look for a height where there is a noticeable jump to get to it, AND#
+	#a noticeable jump for every point higher than the chosen point.  Err on the side of not #
+	#over-interpreting; err on the side of calling it fewer clusters.#
+plot(HC$height) #Scree plot
+A_12 <- (Y[, "ob_al_1"] + Y[, "ob_al_2"]) / 2#
+M_12 <- Y[, "ob_al_2"] - Y[, "ob_al_1"]#
+plot(A_12, M_12, pch = 20, col = "grey", ylim = c(-6, 6))#
+abline(0, 0, lwd = 2, lty = 2)#
+lines(lowess(A_12, M_12), lwd = 2, col = "blue")
+head(Y)
+source("http://bioconductor.org/biocLite.R")
+v
+biocLite("biomaRt")
+library(biomaRt) 								#Load the biomaRt library.
+help(package = "biomaRt")
+listMarts()
+listDatasets(useMart("ensembl"))
+mart <- useMart(biomart = "ensembl", dataset = "hsapiens_gene_ensembl") #Human (hsapiens) data set.
+filters = listFilters("ensembl")
+listFilters(mart)
+listAttributes(mart)[1:100,]
+my_results <- getBM(attributes = c("hgnc_symbol", "ensembl_gene_id"), mart = mart)
+seq_1 <- "GAATTCAC"#
+seq_2 <- "GATTACAA"#
+seq_3 <- "GATATTAA"#
+#
+require(Biostrings)
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = "")))#
+#
+## Use of multiple alignment function 'muscle'.#
+source("http://bioconductor.org/biocLite.R")#
+biocLite("muscle")
+library(muscle)
+mult_align <- muscle(multi)#
+detail(mult_align)
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = "")))
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = ""))))
+mult_align <- muscle(multi)#
+detail(mult_align)
+summary(mult_align)
+mult_align
+seq_1 <- "GAATTCAC"#
+seq_2 <- "GATTACAA"#
+seq_3 <- "CTTA"#
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = ""))))#
+#
+mult_align <- muscle(multi)#
+detail(mult_align)#
+mult_align
+seq_1 <- "GAATTCAC"#
+seq_2 <- "GATTACAA"#
+seq_3 <- "CTTA"#
+seq_4 <- "GACCAAAC"#
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = ""))),#
+  toupper(paste(seq_4, collapse = ""))))#
+#
+mult_align <- muscle(multi)#
+detail(mult_align)#
+mult_align
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = ""))),#
+  toupper(paste(seq_4, collapse = "")))#
+#
+mult_align <- muscle(multi)#
+detail(mult_align)#
+mult_align
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = "")),#
+  toupper(paste(seq_4, collapse = ""))))#
+#
+mult_align <- muscle(multi)#
+detail(mult_align)#
+mult_align
+seq_1 <- "GAATTCAC"#
+seq_2 <- "GATTACAA"#
+seq_3 <- "CTTA"#
+seq_4 <- "GAATTTTTTTCACAA"#
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = "")),#
+  toupper(paste(seq_4, collapse = ""))))#
+#
+mult_align <- muscle(multi)#
+detail(mult_align)#
+mult_align
+seq_1 <- "GAATTCAC"#
+seq_2 <- "GATTACAA"#
+seq_3 <- "CTTA"#
+seq_4 <- "GAATTTTCACAA"#
+multi <- DNAStringSet(c(toupper(paste(seq_1, collapse = "")), #
+  toupper(paste(seq_2, collapse = "")), #
+  toupper(paste(seq_3, collapse = "")),#
+  toupper(paste(seq_4, collapse = ""))))#
+#
+mult_align <- muscle(multi)#
+mult_align
+mult_align								#Print whole alignment#
+print(multi_align, from = 1, to = 10)
+print(mult_align, from = 1, to = 10)
+myScoringMat <- nucleotideSubstitutionMatrix(match = 2, mismatch = -1, baseOnly = TRUE)#
+myScoringMat
+class(myScoringMat)
+colnames(myScoringMat)
+rownames(myScoringMat)
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+	dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+myScoringMat
+source("http://bioconductor.org/biocLite.R")#
+biocLite("Biostrings")#
+library(Biostrings)#
+#
+## Here are two toy sequence examples.#
+seq_1 <- "ACT"#
+seq_2 <- "GCAT"#
+#
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+	dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -1#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+myAlignment
+biocLite("Biostrings")
+library(Biostrings)
+## Here are two toy sequence examples.#
+seq_1 <- "ACT"#
+seq_2 <- "GCAT"#
+#
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+	dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -1#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+myAlignment
+## This is a "local" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "local", scoreOnly = FALSE)#
+myAlignment
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = TRUE)#
+myAlignment
+?pairwiseAlignment
+set.seed(101)#
+setwd("/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Microarrays/raw")#
+#
+#----------------------------------------------------------------------------------#
+## PROBLEM 1: For the yeast data, do the following:#
+#
+# YEAST Data Background:#
+#
+# These data come from Stambuk et al (2009), Genome Res. 19:2271-2278. They are array-#
+# CGH data on yeast expression levels. The specific interest of the study was in #
+# finding genome copy number differences between strains of yeast that are used in #
+# fuel ethanol production, compared to strains that are not used in fuel ethanol #
+# production. The platform used has two "channels," meaning that two samples are #
+# hybridized together on the same array, with a separate dye used to label each #
+# sample. The two dyes are what define the two "channels."#
+##
+# Data can be accessed on GEO, under accession number GSE13875. #
+## Here are "meta data" notes for each of the samples:#
+###
+## 69284: Control vs. control. The yeast strain used here is S288C, which I understand to #
+##        be a "vanilla" yeast. Strain = control, Technician = Dunn, Prep. Date = 2006.#
+## 02340: Ale (Ch2) vs. DBY7286 genomic DNA (Ch1). Control channel again a vanilla yeast #
+##        strain. Strain = Ale, Technician = Unknown, Prep. Date = 1999.#
+## 33091: Control vs. control, again using S288C strain. Strain = control, Technician = #
+##        unknown, Prep. Date = unknown.#
+## 69976: PE2-1 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 69971: BG1-1 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 69973: CAT1-1 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 64995: GSY150 (Ch2) vs. control (Ch1). Strain = bakers, Technician = Dunn, Prep. Date #
+##        = 2005.#
+## 48033: GSY3A (Ch2) vs. control (Ch1). Strain = wine, Technician = Dunn, Prep. Date = #
+##        2004.#
+## 48035: GSY10A (Ch2) vs. control (Ch1). Strain = wine, Technician = Dunn, Prep. Date = #
+##        2004.#
+## 69980: VR1-2 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 69977: PE2-2 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 69972: BG1-2 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 48038: GSY11B (Ch2) vs. control (Ch1). Strain = wine, Technician = Dunn, Prep. Date = #
+##        2004.#
+## 64992: GSY149 (Ch2) vs. control (Ch1). Strain = bakers, Technician = Dunn, Prep. Date #
+##        = 2005.#
+## 69659: Control vs. control. Strain = control, Technician = Dunn, Prep. Date = 2006.#
+## 69974: CAT1-2 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 70239: SA1-2 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 65000: GSY155 (Ch2) vs. control (Ch1). Strain = bakers, Technician = Dunn, Prep. Date #
+##        = 2005.#
+## 65003: GSY154 (Ch2) vs. control (Ch1). Strain = bakers, Technician = Dunn, Prep. Date #
+##        = 2005.#
+## 33093: Control vs. control. Strain = control, Technician = unknown, Prep. Date = #
+##        unknown.#
+## 48031: GSY2A (Ch2) vs. control (Ch1). Strain = wine, Technician = Dunn, Prep. Date = #
+##        2004.#
+## 69979: VR1-1 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+## 69981: SA1-1 (Ch2) vs. control (Ch1). Strain = fuel, Technician = Stambuk, Prep. Date #
+##        = 2006.#
+#
+## Read in raw data files.  #
+dta_69284 = read.delim("69284.txt", skip = 17, header = T)#
+dta_02340 = read.delim("2340.txt", skip = 17, header = T)#
+dta_33091 = read.delim("33091.txt", skip = 18, header = T)#
+dta_69976 = read.delim("69976.txt", skip = 19, header = T)#
+dta_69971 = read.delim("69971.txt", skip = 19, header = T)#
+dta_69973 = read.delim("69973.txt", skip = 19, header = T)#
+dta_64995 = read.delim("64995.txt", skip = 17, header = T)#
+dta_48033 = read.delim("48033.txt", skip = 17, header = T)#
+dta_48035 = read.delim("48035.txt", skip = 17, header = T)#
+dta_69980 = read.delim("69980.txt", skip = 19, header = T)#
+dta_69977 = read.delim("69977.txt", skip = 19, header = T)#
+dta_69972 = read.delim("69972.txt", skip = 19, header = T)#
+dta_48038 = read.delim("48038.txt", skip = 17, header = T)#
+dta_64992 = read.delim("64992.txt", skip = 17, header = T)#
+dta_69659 = read.delim("69659.txt", skip = 17, header = T)#
+dta_69974 = read.delim("69974.txt", skip = 19, header = T)#
+dta_70239 = read.delim("70239.txt", skip = 19, header = T)#
+dta_65000 = read.delim("65000GENEPIX0.txt", skip = 0, header = T)#
+dta_65003 = read.delim("65003.txt", skip = 17, header = T)#
+dta_33093 = read.delim("33093.txt", skip = 18, header = T)#
+dta_48031 = read.delim("48031.txt", skip = 17, header = T)#
+dta_69979 = read.delim("69979.txt", skip = 19, header = T)#
+dta_69981 = read.delim("69981.txt", skip = 19, header = T)#
+#
+n = 23#
+#
+## "Meta-data": which strain category is on which array, who prepared each array, what #
+## year was each array prepared? This information is buried in the GEO data. I originally #
+## recovered it from the Stanford Microarray Database (SMD), an alternative online #
+## repository for microarray data.#
+meta = data.frame("strain" = rep(NA, n), "tech" = rep(NA, n), "year" = rep(NA, n))#
+meta$strain = c("control", "ale", "control", rep("fuel", 3), "bakers", "wine", "wine", #
+  rep("fuel", 3), "wine", "bakers", "control", "fuel", "fuel", "bakers", "bakers", #
+  "control", "wine", "fuel", "fuel")#
+meta$tech = c("dunn", rep("unknown", 2), rep("stambuk", 3), rep("dunn", 3), #
+  rep("stambuk", 3), rep("dunn", 3), rep("stambuk", 2), "dunn", "dunn", "unknown", #
+  "dunn", rep("stambuk", 2))#
+meta$year = c(2006, 1999, "unknown", rep(2006, 3), 2005, 2004, 2004, rep(2006, 3), 2004, #
+  2005, rep(2006, 3), 2005, 2005, "unknown", 2004, 2006, 2006)#
+#
+## Let's toss the 1999 array and the two control arrays with unknown meta info. An array #
+## that old is probably not of the same quality as the others. And, for the two control #
+## arrays with unknown meta info., they may be old, too, who knows?#
+keep_ii = (1:n)[-c(2, 3, 20)]#
+meta = meta[keep_ii, ]; rownames(meta) = 1:20#
+n = 20#
+#
+## Not all arrays have the same features on them. Let's find and keep only the #
+## features that are shared across all arrays.#
+all_spots = table(c(dta_69284[,1], dta_69976[,1], dta_69971[,1], dta_69973[,1], #
+  dta_64995[,1], dta_48033[,1], dta_48035[,1], dta_69980[,1], dta_69977[,1], #
+  dta_69972[,1], dta_48038[,1], dta_64992[,1], dta_69659[,1], dta_69974[,1],#
+  dta_70239[,1], dta_65000[,1], dta_65003[,1], dta_48031[,1], dta_69979[,1],#
+  dta_69981[,1]))#
+uniq_spots = as.numeric(names(all_spots))#
+shared_ii = (1:length(uniq_spots))[all_spots == n]#
+shared_spots = uniq_spots[shared_ii]#
+m_shared = length(shared_spots)#
+#
+## Keep only the data for the shared features. Leaves m = 6740 features.#
+dta_69284 = dta_69284[dta_69284[, 1] %in% shared_spots, ]#
+dta_69976 = dta_69976[dta_69976[, 1] %in% shared_spots, ]#
+dta_69971 = dta_69971[dta_69971[, 1] %in% shared_spots, ]#
+dta_69973 = dta_69973[dta_69973[, 1] %in% shared_spots, ]#
+dta_64995 = dta_64995[dta_64995[, 1] %in% shared_spots, ]#
+dta_48033 = dta_48033[dta_48033[, 1] %in% shared_spots, ]#
+dta_48035 = dta_48035[dta_48035[, 1] %in% shared_spots, ]#
+dta_69980 = dta_69980[dta_69980[, 1] %in% shared_spots, ]#
+dta_69977 = dta_69977[dta_69977[, 1] %in% shared_spots, ]#
+dta_69972 = dta_69972[dta_69972[, 1] %in% shared_spots, ]#
+dta_48038 = dta_48038[dta_48038[, 1] %in% shared_spots, ]#
+dta_64992 = dta_64992[dta_64992[, 1] %in% shared_spots, ]#
+dta_69659 = dta_69659[dta_69659[, 1] %in% shared_spots, ]#
+dta_69974 = dta_69974[dta_69974[, 1] %in% shared_spots, ]#
+dta_70239 = dta_70239[dta_70239[, 1] %in% shared_spots, ]#
+dta_65000 = dta_65000[dta_65000[, 1] %in% shared_spots, ]#
+dta_65003 = dta_65003[dta_65003[, 1] %in% shared_spots, ]#
+dta_48031 = dta_48031[dta_48031[, 1] %in% shared_spots, ]#
+dta_69979 = dta_69979[dta_69979[, 1] %in% shared_spots, ]#
+dta_69981 = dta_69981[dta_69981[, 1] %in% shared_spots, ]#
+#
+m = 6740#
+#
+## Pull out median intensities by channel, log transform.  #
+Y_1 = log2(cbind(dta_69284[,46], dta_69976[,45], dta_69971[,45], dta_69973[,45], #
+  dta_64995[,45], dta_48033[,45], dta_48035[,45], dta_69980[,45], dta_69977[,45], #
+  dta_69972[,45], dta_48038[,45], dta_64992[,45], dta_69659[,45], dta_69974[,45], #
+  dta_70239[,45], dta_65000[,45], dta_65003[,45], dta_48031[,45], dta_69979[,45], #
+  dta_69981[,45]))#
+Y_2 = log2(cbind(dta_69284[,51], dta_69976[,50], dta_69971[,50], dta_69973[,50], #
+  dta_64995[,50], dta_48033[,50], dta_48035[,50], dta_69980[,50], dta_69977[,50], #
+  dta_69972[,50], dta_48038[,50], dta_64992[,50], dta_69659[,50], dta_69974[,50], #
+  dta_70239[,50], dta_65000[,50], dta_65003[,50], dta_48031[,50], dta_69979[,50], #
+  dta_69981[,50]))#
+## Differences in log median intensity between 2 channels.#
+Y = Y_2 - Y_1#
+colnames(Y) <- c(1:20)
+hc_avg = hclust(dist(t(Y)), "average")#
+hc_single = hclust(dist(t(Y)), "single")#
+hc_complete = hclust(dist(t(Y)), "complete")#
+#
+## 1A i): Which two samples are merged first, and what is the distance between them?#
+#
+#Produce dendrogram plots to visualize merges.#
+par(mfrow=c(1,3))#
+plot(hc_avg,main="Avg Linkage")#
+plot(hc_single,main="Single Linkage")#
+plot(hc_complete,main="Complete Linkage")#
+#
+#Output merge data & heights for each merge.#
+cbind(hc_avg$merge, height=hc_avg$height)#
+cbind(hc_single$merge, height=hc_single$height)#
+cbind(hc_complete$merge, height=hc_complete$height)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	#
+## 1A: For each of average, complete, and single linkage, carry out hierarchical clustering #
+## on the samples using Euclidean distance. #
+#
+hc_avg = hclust(dist(t(Y)), "average")#
+hc_single = hclust(dist(t(Y)), "single")#
+hc_complete = hclust(dist(t(Y)), "complete")#
+#
+## 1A i): Which two samples are merged first, and what is the distance between them?#
+#
+#Produce dendrogram plots to visualize merges.#
+par(mfrow=c(1,3))#
+plot(hc_avg,main="Avg Linkage")#
+plot(hc_single,main="Single Linkage")#
+plot(hc_complete,main="Complete Linkage")#
+#
+#Output merge data & heights for each merge.#
+#Negative numbers show groups that haven't been merged to anything else.#
+#Positive numbers indicate a cluster, so +1 means the row 1 merge group, #
+#ie the (-2,-9) cluster merges with obs 19 in row 3..#
+cbind(hc_avg$merge, height=hc_avg$height)#
+cbind(hc_single$merge, height=hc_single$height)#
+cbind(hc_complete$merge, height=hc_complete$height)#
+#
+#Can tie out calculation for euclidian distance as follows (extra):#
+euclidian.dist <- function(x1,x2) sqrt(sum((x1-x2)^2))#
+euc.dist2_9 <- euclidian.dist(Y[,2], Y[,9])#
+#
+## 1A ii) Report a scree plot showing merge distances.  How many clusters would you say there are?#
+par(mfrow=c(1,3))#
+plot(hc_avg$height,main='Avg Linkage Heights')#
+plot(hc_single$height,main='Single Linkage Heights')#
+plot(hc_complete$height,main='Complete Linkage Heights')#
+#
+## 1A iii) Interpet the clusters with respect to the 'meta' data for this data set.#
+#
+#Single linkage:#
+meta[c(11), ] #Left cluster.#
+meta[-c(11), ] #Right cluster.#
+#
+#Avg linkage:#
+meta[c(1,6, 7, 11, 18), ] #Left cluster.#
+meta[-c(1,6, 7, 11, 18), ] #Right cluster.#
+#
+#Complete linkage:#
+meta[c(1,5,6,7,11,12,13,18), ] #Left cluster.#
+meta[-c(1,5,6,7,11,12,13,18), ] #Right cluster.
+?cut
+#EXTRA STUFF: Get y vals automatically for each cluster depending on cut height:#
+install.packages("dendextend")#
+library(dendextend)
+dend_s <- as.dendrogram(hc_single)#
+dend_a <- as.dendrogram(hc_avg)#
+dend_c <- as.dendrogram(hc_complete)
+dend_s
+plot(dend_a)
+cut1 <- cutree(dend_a,h=60)
+cut1
+dim(cut1)
+length(cut1)
+class(cut1)
+names(cut1)
+plot(hc_avg,main="Avg Linkage")
+cut1 <- cutree(dend_a,h=80)	#Cut tree based on height, here set to create 2 clusters at height 80.#
+cut2 <- cutree(dend_a,k=3)	#Cut tree based on number of clusters:
+cut1
+cbind(cut1)
+cut1==1
+names(cut1==1)
+names(cut1[cut1==1])
+as.numeric(names(cut1[cut1==1]))
+meta[as.numeric(names(cut1[cut1==1])), ]
+meta[c(1,6, 7, 11, 18), ]
+meta[-as.numeric(names(cut1[cut1==1])), ] #Right cluster
+meta[-c(1,6, 7, 11, 18), ]
+meta[as.numeric(names(cut1[cut2==1])), ] #Meta for cluster 1. #
+meta[as.numeric(names(cut1[cut2==2])), ] #Meta for cluster 2. #
+meta[as.numeric(names(cut1[cut2==3])), ] #Meta for cluster 3.
+biocLite("seqinr")
+library(seqinr)
+choosebank() #Display available data banks (for reference).#
+choosebank("genbank") #Select genbank.#
+#
+#Extract sequences and names for all variates of PSEN1 gene:#
+PSEN1 <- query(listname = "PSEN1", query="SP=homo sapiens AND K=PSEN1") #
+#
+psen1_seqs <- getSequence(PSEN1) #Assign the variates' DNA sequences to a list variable.#
+psen1_names <- getName(PSEN1)	#Assign vector of names for each PSEN1 variate sequence.
+length(psen1_seqs)
+psen1_names
+write.fasta(psen1_seqs[[1]], psen1_names[1], #
+	file.out = "/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Homework/HW 02/AB159776fasta.fasta")#
+#
+PSEN1Fasta=read.fasta(file="/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Homework/HW 02/AB159776fasta.fasta",seqtype="DNA")#
+PSEN1Fasta
+bc011729 <- psen1_seqs[[3]] #Extract 3rd sequence as its own variable for readability below.#
+sum(table(bc011729)[c('c','g')]) / sum(table(bc011729)) #Display percentage G or C.
+translate(psen1_seqs[[1]][-1])
+source("http://bioconductor.org/biocLite.R")#
+biocLite("Biostrings")#
+library(Biostrings) #CONTAINS SCORING MATRICES for protein sequence alignment.#
+#
+#Save the two sequences as variables.#
+seq_1 <- "GAG"#
+seq_2 <- "GTAG"#
+#
+#Set algorithm parameters.#
+myScoringMat <- nucleotideSubstitutionMatrix(match = 1, mismatch = -1, baseOnly = TRUE)#
+myScoringMat#
+#
+#Set gap parameters.#
+gapOpen <- 0#
+gapExtend <- -2#
+#
+#Calculate optimal alignment.#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+myAlignment
+library(Biostrings)
+#Save the two sequences as variables.#
+seq_1 <- "GAG"#
+seq_2 <- "GTAG"#
+#
+#Set algorithm parameters.#
+myScoringMat <- nucleotideSubstitutionMatrix(match = 1, mismatch = -1, baseOnly = TRUE)#
+myScoringMat#
+#
+#Set gap parameters.#
+gapOpen <- 0#
+gapExtend <- -2#
+#
+#Calculate optimal alignment.#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+myAlignment
+## 3A: What are the optimal alignments, using both the global and local algorithms?#
+#
+#Save the two sequences as variables.#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+#Set up PAM30 error matrix.#
+data(PAM30) #Load PAM30 error matrix.#
+PAM30 		#Display PAM30 scoring matrix.#
+myScoringMat <- "PAM30"#
+#
+#Set gap parameters (same as problem 2).#
+gapOpen <- 0#
+gapExtend <- -2#
+#
+#Global alignment.#
+myAlignment_glob <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+myAlignment_glob
+myAlignment_loc <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = "local", scoreOnly = FALSE)#
+myAlignment_loc
+#This is the code to load up the starlib package.#
+#
+library(devtools)#
+#
+setwd("/Users/jennstarling/TAMU/starlib")#
+install("/Users/jennstarling/TAMU/starlib") #
+#
+# Github varstar package install.#
+#library(devtools)#
+#install_github(‘jstarling1/starlib’,’jstarling1’)#
+#
+library(starlib)		#Load custom starlib package for all custom functions.#
+data(package='starlib')	#View available starlib data sets.#
+ls("package:starlib")	#View all functions in starlib package.
+document()
+align_p_val
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type='local')
+out$tt_B
+dens <- density(out$tt_B)#
+plot(dens,main = '3C: Density plot of randomized scores',#
+	xlab='density',ylab='scores') #Density plot of the B scores.#
+#
+#Add the grey shading for scores >= 19.#
+x1 <- min(which(dens$x >= 19))#
+x2<- max(which(dens$x <= max(dens$x)))#
+with(dens, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+out$p_val
+seq_1
+?pairwiseAlignment
+class(out)
+names(out)
+document()
+?align_p_val
+document()
+?align_p_val
+document()
+?align_p_val
+seq_1 <- "ACT"#
+seq_2 <- "GCAT"#
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+gapOpen <- 0#
+gapExtend <- -1#
+##Perform global alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+ 	gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type='global')
+myAlignment
+pval_output
+?align_p_val
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+##Set up gap parameters:#
+gapOpen <- 0#
+gapExtend <- -2
+library(Biostrings) #
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+##Perform alignment and obtain p-value:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+ 	gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type='global')
+myAlignment
+pval_output
+align_p_val
+document()
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type='local')#
+#
+out$tt_B #Display the output scores for the B randomizations.#
+plot(out$$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot
+out$tt_B #Display the output scores for the B randomizations.#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(dens$x >= out$tt_0))#
+x2<- max(which(dens$x <= max(dens$x)))#
+with(dens, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+names(out)
+## Here are two toy sequence examples.#
+seq_1 <- "GAATTC"#
+seq_2 <- "GATTA"#
+#
+myScoringMat <- nucleotideSubstitutionMatrix(match = 2, mismatch = -1, baseOnly = TRUE)#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+pval_output
+## Here are two toy sequence examples.#
+seq_1 <- "ACT"#
+seq_2 <- "GCAT"#
+#
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+	dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -1#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+pval_output#
+#
+## This is a "local" alignment:#
+myType <- 'local'#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+pval_output
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up gap parameters:#
+gapOpen <- 0#
+gapExtend <- -2
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+##Perform alignment and obtain p-value:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+ 	gapOpening = gapOpen, gapExtension = gapExtend, type = "global", scoreOnly = FALSE)#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type='global')
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(dens$x >= out$tt_0))#
+x2<- max(which(dens$x <= max(dens$x)))#
+with(dens, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up gap parameters:#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+##Set up scoring matrix: (Biostrings contains protein scoring matrices.  #
+##Can also manually set up your own scoring matrix; be sure to name rows and columns.)#
+data(PAM30) ##load PAM30 scoring matrix from Biostrings library.#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+##Perform alignment and obtain p-value:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+ 	gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+#
+out$tt_B 	#Display the output scores for the B randomizations.#
+out$$p_val	#Display the p-value for the alignment.#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(dens$x >= out$tt_0))#
+x2<- max(which(dens$x <= max(dens$x)))#
+with(dens, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))#
+#
+#---------------------------------------------------------------------------------
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up gap parameters:#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+##Perform alignment and obtain p-value:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+ 	gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+#
+out$tt_B 	#Display the output scores for the B randomizations.#
+out$p_val	#Display the p-value for the alignment.#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(dens$x >= out$tt_0))#
+x2<- max(which(dens$x <= max(dens$x)))#
+with(dens, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+out
+out$density$x
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+## Here are two toy sequence examples.#
+seq_1 <- "GAATTC"#
+seq_2 <- "GATTA"#
+#
+myScoringMat <- nucleotideSubstitutionMatrix(match = 2, mismatch = -1, baseOnly = TRUE)#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out$tt_0#
+out$p_val
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+## Here are two toy sequence examples.#
+seq_1 <- "ACT"#
+seq_2 <- "GCAT"#
+#
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+	dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -1#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+pval_output#
+#
+## This is a "local" alignment:#
+myType <- 'local'#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+pval_output#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+## Here are two toy sequence examples.#
+seq_1 <- "ACT"#
+seq_2 <- "GCAT"#
+#
+myScoringMat <- matrix(c(3,-2,-2,-1,-2,2,0,-1,-2,0,2,-2,-1,-1,-2,1),nrow=4,byrow=T,#
+	dimnames=list(c('A','C','T','G'),c('A','C','T','G')))#
+myScoringMat#
+#
+gapOpen <- 0#
+gapExtend <- -1#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+pval_output#
+#
+## This is a "local" alignment:#
+myType <- 'local'#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+data(package = "Biostrings") #CONTAINS SCORING MATRICES for protein sequence alignment.#
+#
+## Let's use BLOSUM62 scoring matrix.#
+data(BLOSUM62)#
+myScoringMat <- "BLOSUM62"  #Could use "PAM30 also.#
+#
+## Now align the following amino acid sequences. This is a global alignment.#
+seq_1 <- "PAWHEAE"#
+seq_2 <- "HEAGAWGHE"#
+myType <- 'global'#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+# The above global alignment resulted in poor alignment on the starting portion of the #
+# amino acid sequences. Let's instead do a local alignment. The local alignment #
+# algorithm just returns the highly similar regions in the two sequences.#
+myType <- 'local'#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+out
+pot(out$density)
+plot(out$density)
+range(x)
+range(out$density$x)
+out$tt_0
+myScoringMat <- "BLOSUM62"  #Could use "PAM30 also.#
+#
+## Now align the following amino acid sequences. This is a global alignment.#
+seq_1 <- "PAWHEAE"#
+seq_2 <- "HEAGAWGHE"#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out$tt_0#
+out$p_val#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up gap parameters:#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+##Set up scoring matrix: (Biostrings contains protein scoring matrices.  #
+##Can also manually set up your own scoring matrix; be sure to name rows and columns.)#
+#
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+##Perform alignment and obtain p-value:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+ 	gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+pval_output <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+#
+out$tt_B 	#Display the output scores for the B randomizations.#
+out$p_val	#Display the p-value for the alignment.#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+out
+seq_1
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up scoring matrix: (Biostrings contains protein scoring matrices.  #
+##Can also manually set up your own scoring matrix; be sure to name rows and columns.)#
+#
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 100, type=myType)#
+out$tt_0#
+out$p_val#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up scoring matrix: (Biostrings contains protein scoring matrices.  #
+##Can also manually set up your own scoring matrix; be sure to name rows and columns.)#
+#
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out$tt_0#
+out$p_val#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up scoring matrix: (Biostrings contains protein scoring matrices.  #
+##Can also manually set up your own scoring matrix; be sure to name rows and columns.)#
+#
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'global'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out$tt_0#
+out$p_val#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+##Set up two sequences:#
+seq_1 <- "ASEDLTI"#
+seq_2 <- "AEEDFGI"#
+#
+##Set up scoring matrix: (Biostrings contains protein scoring matrices.  #
+##Can also manually set up your own scoring matrix; be sure to name rows and columns.)#
+#
+data(PAM30) ##load PAM30 scoring matrix#
+myScoringMat <- "PAM30"#
+#
+#Display align_p_val function for clarity:#
+align_p_val#
+#
+#Run the above functions to generate randomization-based alignment output for the two seqs.#
+#
+gapOpen <- 0#
+gapExtend <- -2#
+myType <- 'local'#
+#
+## This is a "global" alignment:#
+myAlignment <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = myScoringMat, #
+  gapOpening = gapOpen, gapExtension = gapExtend, type = myType, scoreOnly = FALSE)#
+myAlignment#
+#
+out <- align_p_val(seq_1, seq_2, myScoringMat, gapOpen, gapExtend, B = 1000, type=myType)#
+out$tt_0#
+out$p_val#
+#
+#Plot density function for tt_B values (randomization-based aligment scores)#
+plot(out$density,main='Density Plot of Randomized Scores',#
+	xlab='density',ylab='scores') #Density plot#
+#Add the grey shading for scores >= observed score.#
+x1 <- min(which(out$density$x >= out$tt_0))#
+x2<- max(which(out$density$x <= max(out$density$x)))#
+with(out$density, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
+qcspike_raw <- read.table(file='/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Proteomics/qc_spike.csv', header=T, sep=",")#
+	#Data frame is arranged with columns = samples, rows = peptides.#
+	#Col 1 (pro_desc) is a unique identifier for each peptide.#
+	#Cols 2-6 contain additional info about the peptides.#
+	#Col 7 (is_qc) is an indicator for the peptide coming from a QC protein (1=yes/0=no).#
+	#Remaining GS cols contain the peptide intensities for each peptide in each sample.#
+		#G0S1, G0S2, G0S3, G0S4 = replicate samples with QC spiked at high concentration.#
+		#G1S1, G1S2, G1S3, G1S4 = replicate samples with QC spiked at med concentration.#
+		#G2S1, G2S2, G2S3, G2S4 = replicate samples with QC spiked at low concentration.#
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+## 5A: Filter out all peptides for which at least one comparison group as <2 obs (non-NA vals).#
+grp1_NAcount <- apply(qcspike_raw, 1, function(x) sum(is.na(x[8:11])))#
+grp2_NAcount <- apply(qcspike_raw, 1, function(x) sum(is.na(x[12:15])))#
+grp3_NAcount <- apply(qcspike_raw, 1, function(x) sum(is.na(x[16:19])))#
+#
+qcspike <- qcspike_raw[which(grp1_NAcount<=2 & grp2_NAcount<=2 & grp3_NAcount<=2),]#
+#
+#Write table to file for easy visual NA checking in Excel:#
+write.table(qcspike,#
+	file="/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Homework/HW 02/QC_spike_filtered_5a.csv")#
+#How many peptides are left?#
+nrow(qcspike)	#
+#
+#How many peptides are QC vs Salmonella?#
+n_QC <- sum(qcspike$is_qc)  	#30 QC peptides.#
+n_Sal <- nrow(qcspike) - n_QC 	#1703 Salmonella peptides.
+dim(qcSpike)
+n_QC
+n_Sal
+dim(qcspike)
+names(qcspike)
+head(qcspike)
+rownames(qcspike) <- qcspike$pep_id
+names(qcspike)
+class(qcspike)
+head(qcspike)
+## 5B: Twelve side-by-side boxplots to compare the 12 samples, for QC peptides.#
+boxplot(qcspike[qcspike$is_qc==1,8:19],use.cols=T,ylab='QC peptide intensity')
+ls()
+rm(list=ls())
+ls()
