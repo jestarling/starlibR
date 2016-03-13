@@ -104,16 +104,18 @@ align_p_val <- function(seq_1, seq_2, scoringMat, gapOpen, gapExtend, B, type) {
   
   ## For each random sequence, re-run the alignment and store the resulting score.
   tt_B <- numeric(B)
-  for(i in 1:B) 
-    tt_B[i] <- pairwiseAlignment(random_seqs[i], seq_2, substitutionMatrix = scoringMat, 
-      gapOpening = gapOpen, gapExtension = gapExtend, type = type, scoreOnly = TRUE)
+  for(i in 1:B){
+  	tt_B[i] <- pairwiseAlignment(random_seqs[i], seq_2, substitutionMatrix = scoringMat, 
+    	gapOpening = gapOpen, gapExtension = gapExtend, type = type, scoreOnly = TRUE)
+  } 
+
 
   ## Compute a p-value as the proportion of randomization-based alignment scores that are 
   ## equal to or greater than our original observed score.
   p_val <- mean(tt_B >= tt_0)
   
   ## Compute an estimated density function of randomized-alignment scores.
-  dens <- density(out$tt_B)
+  dens <- density(tt_B)
   
   return(list("tt_0" = tt_0, "tt_B" = tt_B, "p_val" = p_val,'density' = dens))
 }
