@@ -5,14 +5,14 @@
 #' This function generates examples of various square matrix types.
 #'
 #' @param type The type of the example matrix to generate.  Required field; default is 'identity'.
-#'	'zero' to generate a zero matrix.
-#'  'identity' to generate an identity matrix.
-#'  'ut' to generate an upper triangular matrix.
-#'  'uut' to generate a unit upper triangular matrix.
-#'  'ust' to generate a strictly upper triangular matrix.
-#'  'lt' to generate a lower triangular matrix.
-#'  'lut' to generate a unit lower triangular matrix.
-#'  'lst' to generate a strictly lower triangular matrix.
+#' @param type='zero' to generate a zero matrix.
+#' @param type='identity' to generate an identity matrix.
+#' @param type='ut' to generate an upper triangular matrix.
+#' @param type='uut' to generate a unit upper triangular matrix.
+#' @param type='ust' to generate a strictly upper triangular matrix.
+#' @param type='lt' to generate a lower triangular matrix.
+#' @param type='lut' to generate a unit lower triangular matrix.
+#' @param type='lst' to generate a strictly lower triangular matrix.
 #' @param n The number of rows and colums of the square matrix (nxn).  Default is n=5.
 #'
 #' @keywords matrix

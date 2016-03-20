@@ -7,17 +7,25 @@
 genMatrix(type = "identity", n = 5)
 }
 \arguments{
-\item{type}{The type of the example matrix to generate.  Required field; default is 'identity'.
-'zero' to generate a zero matrix.
- 'identity' to generate an identity matrix.
- 'ut' to generate an upper triangular matrix.
- 'uut' to generate a unit upper triangular matrix.
- 'ust' to generate a strictly upper triangular matrix.
- 'lt' to generate a lower triangular matrix.
- 'lut' to generate a unit lower triangular matrix.
- 'lst' to generate a strictly lower triangular matrix.}
+\item{type}{The type of the example matrix to generate.  Required field; default is 'identity'.}
 
 \item{n}{The number of rows and colums of the square matrix (nxn).  Default is n=5.}
+
+\item{type='zero'}{to generate a zero matrix.}
+
+\item{type='identity'}{to generate an identity matrix.}
+
+\item{type='ut'}{to generate an upper triangular matrix.}
+
+\item{type='uut'}{to generate a unit upper triangular matrix.}
+
+\item{type='ust'}{to generate a strictly upper triangular matrix.}
+
+\item{type='lt'}{to generate a lower triangular matrix.}
+
+\item{type='lut'}{to generate a unit lower triangular matrix.}
+
+\item{type='lst'}{to generate a strictly lower triangular matrix.}
 }
 \value{
 mat A matrix of the type and dimension specified.
