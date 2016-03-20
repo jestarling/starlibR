@@ -44,39 +44,39 @@ genMatrix <- function(type='identity',n=5){
 	if(type == 'diagonal') { mat = diag(rnorm(n)) }
 	
 	#Upper triangular
-	if(type == 'uTriangular') { 
+	if(type == 'ut') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[lower.tri(mat)] <- 0
 	}
 	
 	#Unit Upper triangular
-	if(type == 'uTriangular') { 
+	if(type == 'uut') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[lower.tri(mat)] <- 0
 		diag(mat) <- 1
 	}
 	
 	#Strictly Upper triangular
-	if(type == 'uTriangular') { 
+	if(type == 'ust') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[lower.tri(mat,diag=T)] <- 0
 	}
 	
 	#Lower triangular
-	if(type == 'uTriangular') { 
+	if(type == 'lt') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[upper.tri(mat)] <- 0
 	}
 	
 	#Unit Lower triangular
-	if(type == 'uTriangular') { 
+	if(type == 'lut') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[upper.tri(mat)] <- 0
 		diag(mat) <- 1
 	}
 	
 	#Strictly Lower triangular
-	if(type == 'uTriangular') { 
+	if(type == 'lst') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[upper.tri(mat,diag=T)] <- 0
 	}
