@@ -35,7 +35,7 @@ genMatrix <- function(type='identity',n=5){
 	mat = NULL #Generate NULL value to hold matrix result.
 	
 	#Zero matrix.
-	if(type == 'zero') { mat = matrix(rep(0,n),nrow=n,byrow=T) }
+	if(type == 'zero') { mat = matrix(rep(0,n*n),nrow=n,byrow=T) }
 	
 	#Identity matrix.
 	if(type == 'identity') { mat = diag(n) }
