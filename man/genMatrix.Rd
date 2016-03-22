@@ -26,6 +26,8 @@ genMatrix(type = "identity", n = 5)
 \item{type='lut'}{to generate a unit lower triangular matrix.}
 
 \item{type='lst'}{to generate a strictly lower triangular matrix.}
+
+\item{type='sym'}{to generate a symmetric matrix.}
 }
 \value{
 mat A matrix of the type and dimension specified.

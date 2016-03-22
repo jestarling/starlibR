@@ -13,6 +13,7 @@
 #' @param type='lt' to generate a lower triangular matrix.
 #' @param type='lut' to generate a unit lower triangular matrix.
 #' @param type='lst' to generate a strictly lower triangular matrix.
+#' @param type='sym' to generate a symmetric matrix.
 #' @param n The number of rows and colums of the square matrix (nxn).  Default is n=5.
 #'
 #' @keywords matrix
@@ -79,6 +80,12 @@ genMatrix <- function(type='identity',n=5){
 	if(type == 'lst') { 
 		mat = matrix(rnorm(n*n),nrow=n)
 		mat[upper.tri(mat,diag=T)] <- 0
+	}
+	
+	#Symmetric matrix.
+	if(type == 'sym') { 
+		mat = matrix(1:(n*n),nrow=n,byrow=T)
+		mat[lower.tri(mat)] = t(mat)[lower.tri(mat)]
 	}
 	
 	return(mat)
