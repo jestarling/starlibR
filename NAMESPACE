@@ -2,6 +2,7 @@
 
 export(ADtest)
 export(ChiFCritVal)
+export(CrossProduct3D)
 export(KStest)
 export(RFSampleScheme)
 export(align_p_val)

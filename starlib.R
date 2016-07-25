@@ -2,8 +2,8 @@
 
 library(devtools)
 
-setwd("/Users/jennstarling/TAMU/starlib")
-install("/Users/jennstarling/TAMU/starlib") 
+setwd("/Users/jennstarling/UT Austin/starlib")
+install("/Users/jennstarling/UT Austin/starlib") 
 
 # Github varstar package install.
 #library(devtools)
@@ -18,3 +18,6 @@ library(devtools)
 install_github(repo="jstarling1/starlib", username = NULL, ref = "master", 
     subdir = NULL, auth_token = github_pat(quiet), host = "api.github.com", 
     force = FALSE, quiet = FALSE)
+
+#Update package documentation in R (roxygen):
+document()
