@@ -1,0 +1,6 @@
+Variable Names:
+VOL: Cubic feet of cab space
+HP: Engine horspower
+MPG: Average miles per gallon
+SP: Top speed (mph)
+WT: Vehicle weight (100 lb)

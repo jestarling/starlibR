@@ -1,999 +1,741 @@
-estimate.mean.fraglen(gr)
-names(gr)
-class(cstest)
-names(cstest)
-class(cstest$ctcf)
-names(genes)
-#Set up a data frame with the gene information, to convert to a GRanges object.#
-genes <- rep(NULL,20)#
-names(genes) <- paste("gene",1:20,sep="")
-genome
-genes <- rep(NULL,20)#
-names(genes) <- paste("gene",1:20,sep="")#
-#
-gene_data <- data.frame(sequence=genes,#
-	start = seq(1,1000,by=50),#
-	end = seq(50,1000,by=50),#
-	length = rep(50,times=20),#
-	names = paste("gene",1:20,sep=""))
-genes <- rep(NULL,20)#
-#
-gene_data <- data.frame(sequence=genes,#
-	start = seq(1,1000,by=50),#
-	end = seq(50,1000,by=50),#
-	length = rep(50,times=20),#
-	names = paste("gene",1:20,sep=""))#
-#
-names(genes) <- paste("gene",1:20,sep="")
-genes
-gene_data <- data.frame(#
-	start = seq(1,1000,by=50),#
-	end = seq(50,1000,by=50),#
-	length = rep(50,times=20),#
-	names = paste("gene",1:20,sep=""))
-gene_data
-gene_data$sequence <- rep(NULL,20)
-gene_data
-for (i in 1:20){ genes[i] <- substr(genome,gene_data$start[i],gene_data$end[i])}
-genes
-gene_data$seqs <- genes
-gene_data
-names(genes) <- paste("gene",1:20,sep="")
-rownames(gene_data) <- paste("gene",1:20,sep="")
-gene_data
-IRanges(gene_data)
-gr <- GRanges(seqnames=rownames(gene_data),#
-	IRanges(start=gene_data$start,end=gene_data$end,width=gene_data$length,names=gene_data$names),#
-	strand=genome,seqlengths=rep(50,20))
-gr <- makeGRangesFromDataFrame(gene_data,seqnames.field="names")
-assay(gr)
-head(gr)
-gr <- makeGRangesFromDataFrame(gene_data,seqnames.field="names",ignore.strand=F)
-gr <- makeGRangesFromDataFrame(gene_data,seqnames.field="names",ignore.strand=F)
-estimate.mean.fraglen(gr)
-warnings()
-values(gr)[,"myseqs"] <- DNAStringSet(gene_data$seqs)
-gr
-estimate.mean.fraglen(gr)
-head(hip)
-plot(hip$LogPeriod)
-plot(hip$A14)
-plot(log(hip$A14))
-plot(hip$LogPeriod,col=c('red','blue','green','purple','pink')[hip$class])
-plot(hip$LogPeriod,col=c('red','blue','green','purple','black')[hip$class])
-plot(hip$LogPeriod,col=c('red','blue','dark green','purple','black')[hip$class])
-par(mfrow=c(1,2))#
-plot(hip$LogPeriod,col=c('red','blue','dark green','purple','black')[hip$class])#
-#
-plot(log(hip$A14),col=c('red','blue','dark green','purple','black')[hip$class])
-plot(hip$LogPeriod,col=c('red','blue','dark green','purple','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('red','blue','dark green','blueviolet','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('red','light blue','dark green','blueviolet','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('red','light blue','navy','blueviolet','black')[hip$class],pch=16)
-par(mfrow=c(1,2))#
-plot(hip$LogPeriod,col=c('red','light blue','navy','blueviolet','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('red','light blue','navy','magenta','black')[hip$class],pch=16)
-par(mfrow=c(1,2))#
-plot(hip$LogPeriod,col=c('steelblue4','light blue','navy','magenta','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('steelblue','light blue','navy','magenta','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('steelblue','skyblue1','navy','magenta','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('steelblue4','skyblue1','navy','magenta','black')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('steelblue4','skyblue1','navy','magenta','chartreuse')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('steelblue4','skyblue1','yellow','magenta','chartreuse')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('steelblue4','skyblue1','orange','magenta','chartreuse')[hip$class],pch=16)
-par(mfrow=c(1,2))#
-plot(hip$LogPeriod,col=c('steelblue4','dodgerblue3','orange','magenta','chartreuse')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('gold','dodgerblue3','forestgreen','magenta','orange')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orange','red')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=16)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class])
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=12)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=19)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=2)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(log(hip$A14),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class])
-plot(log(hip$A14),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot((hip$A14),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-temp
-plot((hip$p2pslope),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot((hip$PH15),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot((hip$log(PH15)),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(log(hip$PH15),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$variation5Bin2)
-plot(hip$variation5bin2,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(is.finite(hip$variation5bin2),col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-temp
-plot(hip$Raw_WeightedStdDev,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$Raw_PercentileSkewness,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$logSigmaPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$WstetsonJweighted,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$LogPeriodMethodLomb ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$LogAmplitude ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$frequencyErrorRatio  ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$logPqso  ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$Detr_LogRange ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20)
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20,#
-	main='Scatter plot of LogPeriod feature',xylab=' ',ylab='LogPeriod')
-par(mfrow=c(1,2))#
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20,#
-	main='Scatter plot of LogPeriod feature by class',xylab=' ',ylab='LogPeriod')#
-plot(hip$Detr_LogRange ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20,#
-	main='Scatter plot of Detr_LogRange feature by class',xylab=' ',ylab='Detr_LogRange')
-par(mfrow=c(1,2))#
-plot(hip$LogPeriod,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20,#
-	main='LogPeriod feature by class',xylab=' ',ylab='LogPeriod')#
-plot(hip$Detr_LogRange ,col=c('forestgreen','dodgerblue3','gold','orangered','red4')[hip$class],pch=20,#
-	main='Detr_LogRange feature by class',xylab=' ',ylab='Detr_LogRange')
-p <- calcProps(hip)
-p
-#p <- c(.1,.3,.2,.05,.35)#
-n1 <- 1000; n2 <- 3000#
-hip1a_strata <- strata(data=hip,stratanames="class",size=p*n1,method='srswr')#
-hip1b_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')#
-#
-#Extract observed data:#
-hip1a <- getdata(hip,hip1_strata)#
-hip1b <- getdata(hip,hip2_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip1a <- data.frame(class=hip1a$class,hip1a[,1:141])#
-hip1b <- data.frame(class=hip1b$class,hip1b[,1:141])#
-#
-table(hip1a$class)#
-table(hip1b$class)#
-#
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
-#
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model1 <- myRF(known=hip1a, unknown=hip1b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
-#
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip1a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with similar class proportions.')#
-lines(density(hip1b$logPeriod),type='l',col='blue')
-em1 <- emAllFeatures(known=hip1a,unknown=hip1b,p=rep(.2,5),maxiter=1000,conv=.00000001)#
-em1$p#
-calcProps(hip1b)
-plot(calcProps(hip1b),col='black',pch=16,main='Identical class proportions',#
-	xaxt='n',xlab='MSE = 0.00015',ylab='Proportions: Black=Actual, Blue=Est')#
-axis(1,at=1:5,labels=classes)	#
-points(em1$p,col='blue',pch=16)
-p <- c(.55,.35,.05,.10,.01)
-sum(p)
-p <- c(.55,.3,.05,.10,.01)
-sum(p)
-p <- c(.55,.30,.05,.09,.01)
-sum(p)
-p <- c(.55,.30,.05,.09,.01)#
-n1 <- 1000; n2 <- 3000#
-hip1a_strata <- strata(data=hip,stratanames="class",size=p*n1,method='srswr')#
-hip1b_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')#
-#
-#Extract observed data:#
-hip1a <- getdata(hip,hip1_strata)#
-hip1b <- getdata(hip,hip2_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip1a <- data.frame(class=hip1a$class,hip1a[,1:141])#
-hip1b <- data.frame(class=hip1b$class,hip1b[,1:141])#
-#
-table(hip1a$class)#
-table(hip1b$class)#
-#
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
-#
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model1 <- myRF(known=hip1a, unknown=hip1b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
-#
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip1a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with similar class proportions.')#
-lines(density(hip1b$logPeriod),type='l',col='blue')
+class(linear$class)
+class(hip$clsas)
+class(hip$class)
+set.seed(1)
+?train
+model1 <- train(class~., #
+			data=known,#
+			method='rf',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									sampling=none, #Do not use up/down/smote/etc.#
+									metric="Accuracy" #Summary metric for performance#
+									))
+model1 <- train(class~., #
+			data=known,#
+			method='rf',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									#sampling=none, #Do not use up/down/smote/etc.#
+									#metric="Accuracy" #Summary metric for performance#
+									))
+known
+known[,keeps_all]
+unknown$classPred <- predict(model1, newdata=unknown)
+unknown$classPred
 model1
-calcProps(linear)
-p2 <- c(.35,.005,.40,.15,.015)
-sum(p2)
-p2 <- c(.35,.005,.40,.15,.02)
-p2
-sum(p2)
-p2 <- c(.35,.005,.45,.15,.05)
-p2
-sum(p2)
-p2 <- c(.35,.005,.45,.15,.045)
-sum(p2)
-#Pull two random data sets from hip, with similar class proportions.#
-#One will be treated as 'known', and the other as 'unknown', for classification demo.#
-#
-#p1 <- calcProps(hip)#
-#p2 <- calcProps(linear)#
-p1 <- c(.55,.30,.05,.09,.01)#
-p2 <- c(.35,.005,.45,.15,.045)#
-n1 <- 1000; n2 <- 3000#
-hip2a_strata <- strata(data=hip,stratanames="class",size=p1*n1,method='srswr')#
-hip2b_strata <- strata(data=hip,stratanames="class",size=p2*n2,method='srswr')#
-#
-#Extract observed data:#
-hip2a <- getdata(hip,hip2a_strata)#
-hip2b <- getdata(hip,hip2b_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip2a <- data.frame(class=hip2a$class,hip2a[,1:141])#
-hip2b <- data.frame(class=hip2b$class,hip2b[,1:141])#
-#
-table(hip2a$class)#
-table(hip2b$class)#
-#
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
-#
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model2 <- myRF(known=hip2a, unknown=hip2b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
-#
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip2a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with different class proportions.')#
-lines(density(hip2b$logPeriod),type='l',col='blue')
-model2
+names(model)
+names(model1)
+model1$results
+model1$besttune
+model1$bestTune
+model1$bestTune$1
+model1$bestTune[1]
+model1$results[which(model1$bestTune[1]),2]
+1-0.9646034
+unknown.error <- mean(1-(unknown$classPred==unknown$class))
+unknown.error
+conf_matrix_unknown <- table(unknown$clasPred, unknown$class)
+unknown$clasPred
+unknown$classPred <- predict(model1, newdata=unknown)
+unknown$clasPred
+unknown
+ctrl <- trainControl(method="cv", classProbs=T)
+model1 <- train(class~., data=known,#
+			method='rf',#
+			ntree = 1500,#
+			tuneLength=5,#
+			metric='Accuracy',#
+			trControl=ctrl)
 model1
-p1 <- c(.55,.30,.05,.09,.01)#
-p2 <- calcProps(linear)#
-n1 <- 1000; n2 <- 3000#
-hip2a_strata <- strata(data=hip,stratanames="class",size=p1*n1,method='srswr')#
-hip2b_strata <- strata(data=hip,stratanames="class",size=p2*n2,method='srswr')#
-#
-#Extract observed data:#
-hip2a <- getdata(hip,hip2a_strata)#
-hip2b <- getdata(hip,hip2b_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip2a <- data.frame(class=hip2a$class,hip2a[,1:141])#
-hip2b <- data.frame(class=hip2b$class,hip2b[,1:141])#
-#
-table(hip2a$class)#
-table(hip2b$class)#
-#
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
-#
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model2 <- myRF(known=hip2a, unknown=hip2b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
-#
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip2a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with different class proportions.')#
-lines(density(hip2b$logPeriod),type='l',col='blue')
+model1 <- train(class~., data=known,#
+			method='rf',#
+			#ntree = 1500,#
+			#tuneLength=5,#
+			metric='Accuracy',#
+			trControl=ctrl)
 model1
-model2
-p <- calcProps(hip)#
-n1 <- 1000; n2 <- 3000#
-hip1a_strata <- strata(data=hip,stratanames="class",size=p*n1,method='srswr')#
-hip1b_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')#
-#
-#Extract observed data:#
-hip1a <- getdata(hip,hip1_strata)#
-hip1b <- getdata(hip,hip2_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip1a <- data.frame(class=hip1a$class,hip1a[,1:141])#
-hip1b <- data.frame(class=hip1b$class,hip1b[,1:141])#
-#
-table(hip1a$class)#
-table(hip1b$class)#
-#
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
-#
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model1 <- myRF(known=hip1a, unknown=hip1b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
-#
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip1a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with similar class proportions.')#
-lines(density(hip1b$logPeriod),type='l',col='blue')
+predict(model1, unknown, type='prob')[,1]
+dim(predict(model1, unknown, type='prob')[,1])
+predict(model1, newdata=unknown)
+mean(1-(classPred==unknown$class))
+classPred <- predict(model1, newdata=unknown)
+length(classPred)
+length(unknown$class)
+unknown.error <- mean(1-(classPred==unknown$class))#
+unknown.error
+conf_matrix_unknown <- table(classPred, unknown$class)
+conf_matrix_unknown
 model1
-p1 <- calcProps(hip)#
-p2 <- calcProps(linear)#
-n1 <- 1000; n2 <- 3000#
-hip2a_strata <- strata(data=hip,stratanames="class",size=p1*n1,method='srswr')#
-hip2b_strata <- strata(data=hip,stratanames="class",size=p2*n2,method='srswr')#
+names(model1)
+model1$pred
+model1$results
+model1$modelInfo
+model1
+model1 <- train(class~., #
+			data=known[,keeps_all],#
+			method='rf',#
+			metric='Accuracy',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									classprobs=T,#
+									sampling="none", #Do not use up/down/smote/etc.#
+									))
+model1 <- train(class~., #
+			data=known[,keeps_all],#
+			method='rf',#
+			metric='Accuracy',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									classprobs=T,#
+									#sampling="none", #Do not use up/down/smote/etc.#
+									))
+model1 <- train(class~., #
+			data=known[,keeps_all],#
+			method='rf',#
+			metric='Accuracy',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									sampling="none", #Do not use up/down/smote/etc.#
+									))
+model1 <- train(class~., #
+			data=known[,keeps_all],#
+			method='rf',#
+			metric='Accuracy',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									sampling="up", #Do not use up/down/smote/etc.#
+									))
+model1 <- train(class~., #
+			data=known[,keeps_all],#
+			method='rf',#
+			metric='Accuracy',#
+			trControl= trainControl(method='cv', #Use cross-validation#
+									number=5, #Use 5 folds for cross-validation#
+									sampling="up" #Do not use up/down/smote/etc.#
+									))
+confusionMatrix(model1)
+?confusionMatrix
+n
+library(DMwR)#
+library(ROSE)
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			classProbs=T,#
+			sampling='none')
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			classProbs=TRUE,#
+			summaryFunction=twoClassSummary,#
+			sampling='none')
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			classProbs=TRUE,#
+			summaryFunction=twoClassSummary,#
+			sampling="down")
+ctrl <- trainControl(method = "repeatedcv", repeats = 5, classProbs = TRUE, summaryFunction = twoClassSummary, ## new option here: sampling = "down")
+ctrl <- trainControl(method = "repeatedcv", repeats = 5, classProbs = TRUE, summaryFunction = twoClassSummary,  sampling = "down")
+ctrl <- trainControl(method='oob', #
+			repeats=5,#
+			classProbs=TRUE,#
+			summaryFunction=twoClassSummary,#
+			sampling="down")
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			#classProbs=TRUE,#
+			summaryFunction=twoClassSummary,#
+			sampling="down")
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			classProbs=TRUE,#
+			#summaryFunction=twoClassSummary,#
+			sampling="down")
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			classProbs=TRUE,#
+			#summaryFunction=twoClassSummary,#
+			sampling="Down")
+ctrl <- trainControl(method='repeatedcv', #
+			repeats=5,#
+			classProbs=TRUE,#
+			#summaryFunction=twoClassSummary,#
+			#sampling="down"#
+			)
+names(ctrl)
+?trainControl
+update.packages(caret)
+update.packages("caret")
+?caret
+??caret
+?caret
+?trainControl
+library(caret)
+?trainControl
+tmp <- installed.packages()#
+installedpkgs <- as.vector(tmp[is.na(tmp[,"Priority"]), 1])#
+save(installedpkgs, file="installed_old.rda")
+load("installed_old.rda")#
+tmp <- installed.packages()#
+installedpkgs.new <- as.vector(tmp[is.na(tmp[,"Priority"]), 1])#
+missing <- setdiff(installedpkgs, installedpkgs.new)#
+install.packages(missing)#
+update.packages()
+source("http://bioconductor.org/biocLite.R") #Link to bioconductor. #
+biocLite("biomaRt") #Install biomaRt.#
+library(biomaRt) #Load the biomaRt library.
+listMarts()#
+listDatasets(useMart("ensembl"))#
+mart <- useMart(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+library(biomaRt)
+listMarts()
+filters = listFilters("ensembl") #Lists filters for restricting output. (See vignette)
+filters = listFilters(ensembl) #Lists filters for restricting output. (See vignette)
+filters = listFilters(mart) #Lists filters for restricting output. (See vignette)
+mart <- useMart(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")#
+filters = listFilters(mart) #Lists filters for restricting output. (See vignette)
+mart
+filters
+listAttributes(mart)[1:100,]
+my_results <- getBM(attributes = c("hgnc_symbol", "ensembl_gene_id"), mart = mart)
+my_results
+head(my_results)
+sprr4_eid <- my_results[which(hgnc_symbol='SPRR4'),'ensembl_gene_id']
+sprr4_eid <- my_results[which(hgnc_symbol='SPRR4'), ]
+sprr4_eid <- my_results[which(hgnc_symbol=='SPRR4'), ]
+sprr4_eid <- my_results[which(my_results$hgnc_symbol=='SPRR4'), ]
+sprr4_eid
+sprr4_eid <- my_results[which(my_results$hgnc_symbol=='SPRR4'),'ensembl_gene_id']
+sprr4_eid
+?getSequence
+seq_cDNA <- getSequence(id="SPRR4", type="hgnc_symbol", seqType="cdna", mart = mart)#
+show(seq_cDNA)
+seq_peptide <- getSequence(id="SPRR4", type="hgnc_symbol", seqType="peptide", mart = mart)#
+show(seq_peptide)
+?getSequence
+seq_peptide <- getSequence(id="SPRR4", type="hgnc_symbol", seqType="peptide", mart = mart)
+show(seq_peptide)
+seq_peptide
+seq_pep <- getSequence(id="SPRR4", type="hgnc_symbol", seqType="peptide", mart = mart)#
+show(seq_pep)
+?getSequence
+my_results <- getBM(attributes = c("hgnc_symbol", "entrezgene"), mart = mart)#
+head(my_results) #Shows just the top of the my_results data set. First few rows.
+sp44r_entrezID <- my_results[which(my_results$hgnc_symbol=="SPRR4"), ]
+sphead(my_results)#
 #
-#Extract observed data:#
-hip2a <- getdata(hip,hip2a_strata)#
-hip2b <- getdata(hip,hip2b_strata)#
+sprr4_entrezID <- my_results[which(my_results$hgnc_symbol=="SPRR4"), ]
+sprr4_entrezID
+sprr4_entrezID <- my_results[which(my_results$hgnc_symbol=="SPRR4"), "entrezgene"]
+sprr4_entrezID
+sprr4_eID2 <- unlist(mget("SPRR4", org.Hs.egSYMBOL2EG, ifnotfound = NA))
+## This code will convert gene symbols back to Entrez ID's.#
+biocLite("org.Hs.eg.db")#
+library(org.Hs.eg.db)
+sprr4_eID2 <- unlist(mget("SPRR4", org.Hs.egSYMBOL2EG, ifnotfound = NA))
+sprr4_eID2
+library(org.Hs.eg.db)#
 #
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip2a <- data.frame(class=hip2a$class,hip2a[,1:141])#
-hip2b <- data.frame(class=hip2b$class,hip2b[,1:141])#
+sprr4_GO <- mget(sprr4_eID2, org.Hs.egGO)#
+sprr4_GO
+biocLite("GO.db")#
+library(GO.db)
+GO_BP1 = list(GOID("GO:0018149"), Term("GO:0018149"), Synonym("GO:0018149"), #
+  Secondary("GO:0018149"), Definition("GO:0018149"), Ontology("GO:0018149"))
+GO_BP1
+gocode <- "GO:0018149"#
+GO_BP1 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))
+GO_BP1
+sprr4_GO
+gocode <- "GO:0018149"#
+GO_BP1 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))#
+GO_BP1
+gocode <- "GO:0030216"#
+GO_BP2 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))#
+GO_BP2
+gocode <- "GO:0031424"#
+GO_BP3 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))  #
+GO_BP3
+gocode <- "GO:0001533"#
+GO_CC1 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))  #
+GO_CC1
+gocode <- "GO:0005737"#
+GO_CC2 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))  #
+GO_CC2
+gocode <- "GO:0005938"#
+GO_CC3 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))    #
+GO_CC3
+#Biological processes (indicated by 'BP' in GO output.)#
+gocode <- "GO:0018149"#
+GO_BP1 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))#
+GO_BP1#
 #
-table(hip2a$class)#
-table(hip2b$class)#
+gocode <- "GO:0030216"#
+GO_BP2 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))#
+GO_BP2 #
+gocode <- "GO:0031424"#
+GO_BP3 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))  #
+GO_BP3
+gocode <- "GO:0001533"#
+GO_CC1 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))  #
+GO_CC1
+gocode <- "GO:0005737"#
+GO_CC2 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))  #
+GO_CC2
+gocode <- "GO:0005938"#
+GO_CC3 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))    #
+GO_CC3
+#Molecular function (indicated by 'MF' in the GO output.)#
+gocode <- "GO:0005198"#
+GO_MF1 = list(GOID(gocode), Term(gocode), Synonym(gocode), #
+  Secondary(gocode), Definition(gocode), Ontology(gocode))   #
+GO_MF1
+brca1_eid <- unlist(mget("BRCA1", org.Hs.egSYMBOL2EG, ifnotfound = NA))
+brca1_eid
+brca1_GO <- mget(brca1_eid, org.Hs.egGO)
+brca1_GO
+affy_entrez <- hgu133aENTREZID
+biocLite("hgu133a.db")#
+library("hgu133a.db")
+affy_entrez <- hgu133aENTREZID
+affy_entrez
+mapped_probes <- mappedkeys(affy_entrez)#
+as.list(affy_entrez[mapped_probes[1:5]])
+mapped_probes
+biocLite("KEGG.db")#
+library(KEGG.db)#
+library(org.Hs.eg.db)
+kegg <- mget(brca1_eid, KEGGEXTID2PATHID, ifnotfound = list(NA))
+kegg
+KEGGPATHID2NAME$"hsa04120"
+## A list of Entrez gene id's.#
+EIDs <- c("1", "10", "100", "1000", "5982")#
 #
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
+## For each gene, get KEGG identifiers for all known pathways that the gene is involved #
+## in. Then inspect the selected pathway names for the second gene. The first pathway#
+## identified is involved in caffiene metabolism. You can see an interaction map for #
+## this pathway here: #
+###
+##   http://www.genome.jp/kegg-bin/show_pathway?map00232. #
+###
+## Notice the CYP1A2 and CYP2A6 genes that are found below (in the 'caffSymbols' object). #
+###
+## The 'mget' function searches for each of the Entrez ID's in the KEGGEXTID2PATHID list #
+## of KEGG entries. If an Entrez ID is not found to have a corresponding KEGG entry, NA #
+## is returned. By indexing KEGGEXTID2PATHID by the returned KEGG identifiers, we see the #
+## pathways that the corresponding gene is involved in.#
+kegg <- mget(EIDs, KEGGEXTID2PATHID, ifnotfound = list(NA))
+kegg
+KEGGPATHID2NAME$"00232"
+KEGGPATHID2NAME$"04120"
+ump_EIDs = KEGGPATHID2EXTID$hsa04120#
+ump_symbols = mget(ump_EIDs, org.Hs.egSYMBOL, ifnotfound = NA)#
+ump_symbols
+library(varstar)
+?emCalcMix
+install("/Users/jennstarling/TAMU/STAT 685 (Astronomy Group)/varstar_package/varstar")#
+library(varstar)
+library(roxygen2)#
+library(devtools)
+install("/Users/jennstarling/TAMU/STAT 685 (Astronomy Group)/varstar_package/varstar")#
+library(varstar)
+?emCalcMix
+qcspike_raw <- read.table(file='/Users/jennstarling/TAMU/STAT 646 (Bioinformatics)/Data Sets/Proteomics/qc_spike.csv', header=T, sep=",")
+ls()
+library(seqinr)
+library(Biostrings)
+# FUNCTION DEFINITION to generate random permutations of a sequence.#
+gen_random_seqs <- function(sq, B) {#
+  ## Break input sequence into vector of characters.#
+  sq <- strsplit(sq, "")[[1]]#
+  n <- length(sq)#
 #
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model2 <- myRF(known=hip2a, unknown=hip2b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
+  ## Compute sample proportions of each observed letter.#
+  sq_tbl <- table(sq)#
+  sq_letters <- names(sq_tbl)#
+  n_letters <- length(sq_letters)#
+  pp <- numeric()#
+  for(i in 1:length(sq_letters)) #
+    pp[i] <- sq_tbl[i] / n#
+  ## Generate B random sequences by sampling with replacement using a multinomial model.#
+  sqs <- numeric(B)#
+  for(i in 1:B) #
+    sqs[i] <- paste(sample(sq_letters, n, rep = TRUE, prob = pp), collapse = "")#
 #
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip2a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with different class proportions.')#
-lines(density(hip2b$logPeriod),type='l',col='blue')
-model2
-p1
-p2
-round(p2,2)
-round(p1,2)
-round(p2,2)
-plot()
-hip2a[hip2a$class=='eb','A14']
-hip2a$A14
-training_densities <- list(#
-	hip2a[hip2a$class=='eb','A14'],#
-	hip2a[hip2a$class=='lpv','A14'],#
-	hip2a[hip2a$class=='rrab','A14'],#
-	hip2a[hip2a$class=='rrc','A14'],#
-	hip2a[hip2a$class=='sxp_ds','A14'])
-length(training_densities)
-train <- list(#
-	hip2a[hip2a$class=='eb','A14'],#
-	hip2a[hip2a$class=='lpv','A14'],#
-	hip2a[hip2a$class=='rrab','A14'],#
-	hip2a[hip2a$class=='rrc','A14'],#
-	hip2a[hip2a$class=='sxp_ds','A14'])
-plot(density(train[1]),col='black')
-plot(density(train[[1]]),col='black')
-plot(density(train[[1]]),col='black')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')
-plot(density(train[[1]]),col='black',xlim=c(-.05,.10))#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10))#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10),main='Training Set Densities: Feature A14')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')
-plot(density(hip2b$A14),col='black')
-plot(density(hip2a$A14),col='black')#
-plot(density(hip2b$A14),col='blue')
-plot(density(hip2a$A14),col='black')#
-lines(density(hip2b$A14),col='blue')
-calcProps(hip2a)
-calcProps(hip2b)
-em$2
-em2
-em2$p
-calcProps(hip1a)
-calcProps(hip2a)
-hip_rebalanced <- strata(data=hip,stratanames='class',size=em2$p*n2,method='srswr')#
-hip_rebal <- getdata(hip2a,hip_rebalanced)
-calcProps(hip_rebal)
-em2$p
-hip_rebalanced <- strata(data=hip,stratanames='class',size=em2$p*nrow(hip2a),method='srswr')#
-hip_rebal <- getdata(hip2a,hip_rebalanced)
-em2$p
-calcProps(hip_rebal)
-calcProps(hip2b)
-hip_rebal_strata <- strata(data=hip2a,stratanames='class',size=em2$p*nrow(hip2a),method='srswr')#
-hip_rebal <- getdata(hip2a,hip_rebalanced)
-em2$p#
-calcProps(hip_rebal)
-plot(density(hip2a$A14),col='black')#
-lines(density(hip2b$A14),col='blue')#
+  return(sqs)#
+}    #
+# FUNCTION DEFINITION:  Function for computing a p-value for the alignment of #
+# two sequences. Length(seq_1) must be <= Length(seq_2) in the arguments.#
+# Type must be 'local' or 'global', in quotes.#
+align_p_val <- function(seq_1, seq_2, scoringMat, gapOpen, gapExtend, B, type) {#
+  ## Compute alignment score for original pair of sequences.#
+  tt_0 <- pairwiseAlignment(seq_1, seq_2, substitutionMatrix = scoringMat, #
+    gapOpening = gapOpen, gapExtension = gapExtend, type = type, scoreOnly = TRUE)#
 #
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-hip_rebal_strata <- strata(data=hip2a,stratanames='class',size=em2$p*nrow(hip2a),method='srswr')#
-hip_rebal <- getdata(hip2a,hip_rebalanced)#
+  ## Generate B random versions of first sequence.#
+  random_seqs <- gen_random_seqs(seq_1, B)#
+  ## For each random sequence, re-run the alignment and store the resulting score.#
+  tt_B <- numeric(B)#
+  for(i in 1:B) #
+    tt_B[i] <- pairwiseAlignment(random_seqs[i], seq_2, substitutionMatrix = scoringMat, #
+      gapOpening = gapOpen, gapExtension = gapExtend, type = type, scoreOnly = TRUE)#
 #
-em2$p#
-calcProps(hip_rebal)#
+  ## Compute a p-value as the proportion of randomization-based alignment scores that are #
+  ## equal to or greater than our original observed score.#
+  p_val <- mean(tt_B >= tt_0)#
+  return(list("tt_0" = tt_0, "tt_B" = tt_B, "p_val" = p_val))#
+}
+choosebank("genbank")
+H1F0_h <- query(listname = "H1F0", query="SP=homo sapiens AND K=H1F0")
+H1F0_m <- query(listname = "H1F0", query="SP=mus musculus AND K=H1F0")
+h1f0_h_seqs <- getSequence(H1F0_h)
+h1f0_m_seqs <- getSequence(H1F0_m)
+h1f0_h_names <- getName(H1F0_h)	#Assign vector of names for each variate sequence.#
+h1f0_m_names <- getName(H1F0_m)
+h1f0_h_seq1 <- h1f0_h_seqs[[1]]		#Extract first sequence for humans.#
+h1f0_m_seq1 <- h1f0_m_seqs[[1]]
+sum(h1f0_h_seq1 != h1f0_m_seq1) / length(h1f0_h_seq1)
+dotPlot(h1f0_h_seq1, h1f0_m_seq1, col=c("white", "red"), #
+  xlab = "H1F0 humans", ylab = "H1F0 mice")
+score_mat <- nucleotideSubstitutionMatrix(match = 1, mismatch = -1, baseOnly = TRUE)
+gapOpen <- 0#
+gapExtend <- -2
+seq_1 <- toupper(paste(h1f0_h_seq1, sep="", collapse="")) #Reformat sequence vector to one char string.#
+seq_2 <- toupper(paste(h1f0_m_seq1, sep="", collapse="")) #Reformat sequence vector to one char string. #
+	#REQUIRES UPPER-CASE LETTER SEQUENCES!
+seq_1
+seq_2
+out <- align_p_val(seq_1, seq_2, score_mat, gapOpen, gapExtend, B = 1000, type='global')
+out$p_val
+h1f0_sp <- query(listname="h1f0_sp", query="K=h1f0", virtual=TRUE)
+h1f0_species <- query(listname="h1f0_species", query="PS h1f0_sp")
+h1f0_species_names <- getName(h1f0_species)
+h1f0_species_names #Display species names.#
+length(h1f0_species_names)
+#Obtain all gene sequence variates for humans (h), mice (m) and cows (c).#
+h1f0_h <- query(listname="h1f0_sp", query="SP=HOMO SAPIENS AND K=h1f0")
+h1f0_m <- query(listname="h1f0_sp", query="SP=MUS MUSCULUS AND K=h1f0")
+h1f0_c <- query(listname="h1f0_sp", query="SP=BOS TAURUS AND K=h1f0")
+h1f0_h_seq1 <- getSequence(h1f0_h)[[1]]
+h1f0_m_seq1 <- getSequence(h1f0_m)[[1]]
+h1f0_c_seq1 <- getSequence(h1f0_c)[[1]]
+h1f0_h_seq1_name <- getName(h1f0_h)[[1]]
+h1f0_m_seq1_name <- getName(h1f0_m)[[1]] #Name for 1st H1F0 sequence for mice.#
+h1f0_c_seq1_name <- getName(h1f0_c)[[1]]
+biocLite("muscle")
+source("http://bioconductor.org/biocLite.R")
+biocLite("muscle")
+library(muscle)
+h <- toupper(paste(h1f0_h_seq1,collapse="")) #Format human seq vector as single all caps char string.#
+m <- toupper(paste(h1f0_m_seq1,collapse="")) #Format mouse seq vector as single all caps char string.#
+c <- toupper(paste(h1f0_c_seq1,collapse="")) #Format cow seq vector as single all caps char string.#
+stringset <- DNAStringSet(c(h,m,c)) #Create a DNA String Set object. Part of 'muscle' package.#
+names(stringset) <- c('human','mouse','cow')
+h1f0_align <- muscle(stringset)
+print(h1f0_align, from = 1, to = 50)
+#Z and t-statistic critical value calculator:#
 #
-lines(density(hip_rebal$A14),col='red')
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-hip_rebal_strata <- strata(data=hip,stratanames='class',size=em2$p*nrow(hip),method='srswr')#
-hip_rebal <- getdata(hip,hip_rebalanced)
-em2$p#
-calcProps(hip_rebal)
-calcProps(hip2b)
-pe <- em2$p
-pe
-p1
-p2
-calcProprs(hip2b)
-calcProps(hip2)
-calcProps(hip2b)
-pe
-pe <- em2$p#
+#----------------------------------------------------------------#
+# Roxy package build comments:#
+#' critValCalc(conf,n,p) A critical value function for Z and T distributions.#
+#'#
+#' This function returns two tables of critical values (one-sided and two-sided)#
+#' for the Z (normal) and t (central t) distributions.#
+#'#
+#' @param conf A vector of confidence levels (1-alpha) to calculate critical values.  #
+#' 	Defaults to c(.99, .985, .975, .95, .9)#
+#' @param n A sample size for calculating T dist's degrees of freedom.  Defaults to 1000.#
+#' @param p The number of parameters being estimated for calculating T dist's degrees of#
+#'	freedom.  Defaults to 1.#
+#'#
+#' @keywords critical values hypothesis testing#
+#'#
+#' @return Returns a list object x containing the following values.#
+#' @return x$n The sample size input by the user.#
+#' @return x$p The number of estimated parameters input by the user.#
+#' @x$twoSided The table of 2-sided critical values for the Z and T dists.#
+#' @x$oneSided The table of 1-sided critical values for the Z and T dists.#
+#'#
+#' @examples#
+#' ## Input specific parameters.#
+#' critValCalc(conf=c(.99,.95), n=1000, p=1)#
+#' ## Run with default parameters.#
+#' critValCalc()#
+#'#
+#' @author Jennifer Starling#
+#'#
+#' @export#
+#----------------------------------------------------------------#
 #
-hip2em_strata <- strata(data=hip,stratanames="class",size=pe*n2,method='srswr')#
+critValCalc = function(conf=c(.99,.98,.975,.95,.9),n=1000,p=1){#
+	conf=conf #Takes a user input for a vector of 1+ conf (1-alpha) values to use.#
+		#Default value is c(.99, .98, .975, .95, .9)#
+	n = n #Sets up n value for df calculation (example, t-dist).#
+	p=p #Sets up p parameter for df calculation.#
+	a<-1-conf #Set up vector of alpha values.#
+	#Calculate 2-sided critical values.#
+	z <- qnorm(1-a/2,0,1) #Standard normal Z critical values.#
+	t <- qt(1-a/2,n-p)  #Standard values are n-1, for one parameter being estimated.#
+	qf(.95, df1=5, df2=2) #
+	#Calculate 1-sided critical values.#
+	zU<-qnorm(1-a,0,1)#
+	tU<-qt(1-a,n-p)#
+	x = list()#
+	x$n <- n#
+	x$p <- p#
+	x$twoSided <- cbind(conf,z,t)#
+	x$oneSided <- cbind(conf,zU,tU)#
+	return(x)#
+}
+critValCalc(.95,n=1000,p=2)
+ChiFCritVals = function(conf=c(.99,.98,.975,.95,.9),n=1000,p=1,n2=1000,p2=1){#
+	conf=conf #Takes a user input for a vector of 1+ conf (1-alpha) values to use.#
+		#Default value is c(.99, .98, .975, .95, .9)#
+	n=n #Sets up n value for df calculation for chi-sq, and df1 for F.#
+	p=p #Sets up p parameter for df calculation for chi-sq, and df1 for F.#
+	n2=n2 #Sets up n2 value for df calculation for df2 for F.#
+	p2=p2 #Sets up p2 parameter for df calculation for df2 for F.#
+	a<-1-conf #Set up vector of alpha values.#
+	#Calculate 2-sided critical values.#
+	c <- qchisq(1-a/2,df=n-p) 			#Chisq dist.#
+	f <- qf(1-a/2,df1=n-p,df2=n2-p2)	#F dist.#
+	#Calculate 1-sided critical values.#
+	cU <- qchisq(1-a,df=n-p) 			#Chisq dist.#
+	fU <- qf(1-a,df1=n-p,df2=n2-p2)		#F dist.#
+	x = list()#
+	x$n <- n#
+	x$p <- p#
+	x$n2 <- n2#
+	x$p2 <- p2#
+	x$twoSided <- cbind(conf,c,f)#
+	x$oneSided <- cbind(conf,cU,fU)#
+	return(x)#
+}
+ChiFCritVals()
+ChiFCritVals = function(conf=c(.99,.98,.975,.95,.9),n=1000,p=1,n2=1000,p2=1){#
+	conf=conf #Takes a user input for a vector of 1+ conf (1-alpha) values to use.#
+		#Default value is c(.99, .98, .975, .95, .9)#
+	n=n #Sets up n value for df calculation for chi-sq, and df1 for F.#
+	p=p #Sets up p parameter for df calculation for chi-sq, and df1 for F.#
+	n2=n2 #Sets up n2 value for df calculation for df2 for F.#
+	p2=p2 #Sets up p2 parameter for df calculation for df2 for F.#
+	a<-1-conf #Set up vector of alpha values.#
+	#Calculate 2-sided critical values.#
+	c <- qchisq(1-a/2,df=n-p-1) 			#Chisq dist.#
+	f <- qf(1-a/2,df1=n-p,df2=n2-p2)	#F dist.#
+	#Calculate 1-sided critical values.#
+	cU <- qchisq(1-a,df=n-p-1) 			#Chisq dist.#
+	fU <- qf(1-a,df1=n-p,df2=n2-p2)		#F dist.#
+	x = list()#
+	x$n <- n#
+	x$p <- p#
+	x$n2 <- n2#
+	x$p2 <- p2#
+	x$twoSided <- cbind(conf,c,f)#
+	x$oneSided <- cbind(conf,cU,fU)#
+	return(x)#
+}
+ChiFCritVals()
+#Chisq & F-statistic critical value calculator:#
 #
-#Extract observed data:#
-hip2em <- getdata(hip,hip2em_strata)
-calcProps(hip2em)
-em2$p#
-calcProps(hip2em)
-calcProps(hip)
-calcProps(hip2a)
-calcProps(hip2b)
-em2$p
-em2$p*nrow(hip)
-em2$p*nrow(hip)/nrow(hip)
-rebal_strata <- strata(data=hip,stratanames='class',size=em2$p*nrow(hip),method='srswr')
-rebal_strata
-head(rebal_strata)
-table(rebal_strata$Stratum)
-table(rebal_strata$Stratum)/nrow(hip)
-em2$p
-hip_rebal <- getdata(hip,rebal_strata)
-calcProps(hip_rebal)
-rebal_strata <- strata(data=hip,stratanames='class',size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2
-hip_rebal <- getdata(hip,rebal_strata)
-calcProps(hip_rebal)
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames='class',size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
+#----------------------------------------------------------------#
+# Roxy package build comments:#
+#' ChiFCritVal(conf,n,p) A critical value function for Z and T distributions.#
+#'#
+#' This function returns two tables of critical values (one-sided and two-sided)#
+#' for the Z (normal) and t (central t) distributions.#
+#'#
+#' @param conf A vector of confidence levels (1-alpha) to calculate critical values.  #
+#' 	Defaults to c(.99, .985, .975, .95, .9)#
+#' @param n A sample size for calculating T dist's degrees of freedom.  Defaults to 1000.#
+#' @param p The number of parameters being estimated for calculating T dist's degrees of#
+#'	freedom.  Defaults to 1.#
+#'#
+#' @keywords critical values hypothesis testing#
+#'#
+#' @return Returns a list object x containing the following values.#
+#' @return x$n The sample size input by the user.#
+#' @return x$p The number of estimated parameters input by the user.#
+#' @x$twoSided The table of 2-sided critical values for the Z and T dists.#
+#' @x$oneSided The table of 1-sided critical values for the Z and T dists.#
+#'#
+#' @examples#
+#' ## Input specific parameters.#
+#' critValCalc(conf=c(.99,.95), n=1000, p=1)#
+#' ## Run with default parameters.#
+#' critValCalc()#
+#'#
+#' @author Jennifer Starling#
+#'#
+#' @export#
+#----------------------------------------------------------------#
 #
-hip_rebal <- getdata(hip,rebal_strata)#
-lines(density(hip_rebal$A14),col='red')#
+ChiFCritVal = function(conf=c(.99,.98,.975,.95,.9),n=1000,p=1,n2=1000,p2=1){#
+	conf=conf #Takes a user input for a vector of 1+ conf (1-alpha) values to use.#
+		#Default value is c(.99, .98, .975, .95, .9)#
+	n=n #Sets up n value for df calculation for chi-sq, and df1 for F.#
+	p=p #Sets up p parameter for df calculation for chi-sq, and df1 for F.#
+	n2=n2 #Sets up n2 value for df calculation for df2 for F.#
+	p2=p2 #Sets up p2 parameter for df calculation for df2 for F.#
+	a<-1-conf #Set up vector of alpha values.#
+	#Calculate 2-sided critical values. (Both tail probabilities)#
+	c <- qchisq(1-a/2,df=n-p-1) 			#Chisq dist.#
+	f <- qf(1-a/2,df1=n-p-1,df2=n2-p2-1)	#F dist.#
+	#Calculate 1-sided critical values. (Right tail probabilities)#
+	cU <- qchisq(1-a,df=n-p-1) 				#Chisq dist.#
+	fU <- qf(1-a,df1=n-p-1,df2=n2-p2-1)		#F dist.#
+	x = list()#
+	x$n <- n#
+	x$p <- p#
+	x$n2 <- n2#
+	x$p2 <- p2#
+	x$twoSided <- cbind(conf,c,f)#
+	x$oneSided <- cbind(conf,cU,fU)#
+	return(x)#
+}
+ChiFCritVal
+ChiFCritVal()
+#Chisq & F-statistic critical value calculator:#
 #
-calcProps(hip_rebal)#
-em2$p
-table(rebal_strata$Stratum)/n2#
-em2$p
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p
-hip_rebal <- getdata(hip,rebal_strata)
-calcProps(hip_rebal)
-rm(hip_rebal)
-hip_rebal
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
+#----------------------------------------------------------------#
+# Roxy package build comments:#
+#' ChiFCritVal(conf,n,p) A critical value function for Z and T distributions.#
+#'#
+#' This function returns two tables of critical values (one-sided and two-sided)#
+#' for the chi-squared and F (central) distributions.#
+#'#
+#' @param conf A vector of confidence levels (1-alpha) to calculate critical values.  #
+#' 	Defaults to c(.99, .985, .975, .95, .9)#
+#' @param n A sample size for calculating degrees of freedom (df1 for F).  Defaults to 1000.#
+#' @param p The number of parameters being estimated for degrees of freedom (df1 for F).  Defaults to 1.#
+#' @param n2 A sample size for calculating degrees of freedom (df2 for F).  Defaults to 1000.#
+#' @param p2 The number of parameters being estimated for degrees of freedom (df2 for F).  Defaults to 1.#
+#'#
+#' @keywords critical values hypothesis testing#
+#'#
+#' @return Returns a list object x containing the following values.#
+#' @return x$n The sample size input by the user.#
+#' @return x$p The number of estimated parameters input by the user.#
+#' @return x$n2 The second sample size input by the user.#
+#' @return x$p2 The second number of estimated parameters input by the user.#
+#' @x$twoSided The table of 2-sided critical values for the chi-squred and F dists..#
+#' @x$oneSided The table of 1-sided critical values (right tail) for the chi-squred and F dists.#
+#'#
+#' @examples#
+#' ## Input specific parameters.#
+#' ChiFCritVal(conf=c(.99,.95), n=1000, p=1)#
+#' ## Run with default parameters.#
+#' ChiFCritVal()#
+#'#
+#' @author Jennifer Starling#
+#'#
+#' @export#
+#----------------------------------------------------------------#
 #
-hip_rebal <- getdata(hip,rebal_strata)#
-calcProps(hip_rebal)#
-em2$p
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])
-calcProps(hip_rebal)
-rm(hip_rebal)
-hip_rebal
-em2$p
-p <- em2$p#
-n2 <- 3000#
-hipRebal_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')#
+ChiFCritVal = function(conf=c(.99,.98,.975,.95,.9),n=1000,p=1,n2=1000,p2=1){#
+	conf=conf #Takes a user input for a vector of 1+ conf (1-alpha) values to use.#
+		#Default value is c(.99, .98, .975, .95, .9)#
+	n=n #Sets up n value for df calculation for chi-sq, and df1 for F.#
+	p=p #Sets up p parameter for df calculation for chi-sq, and df1 for F.#
+	n2=n2 #Sets up n2 value for df calculation for df2 for F.#
+	p2=p2 #Sets up p2 parameter for df calculation for df2 for F.#
+	a<-1-conf #Set up vector of alpha values.#
+	#Calculate 2-sided critical values. (Both tail probabilities)#
+	c <- qchisq(1-a/2,df=n-p-1) 			#Chisq dist.#
+	f <- qf(1-a/2,df1=n-p-1,df2=n2-p2-1)	#F dist.#
+	#Calculate 1-sided critical values. (Right tail probabilities)#
+	cU <- qchisq(1-a,df=n-p-1) 				#Chisq dist.#
+	fU <- qf(1-a,df1=n-p-1,df2=n2-p2-1)		#F dist.#
+	x = list()#
+	x$n <- n#
+	x$p <- p#
+	x$n2 <- n2#
+	x$p2 <- p2#
+	x$twoSided <- cbind(conf,c,f)#
+	x$oneSided <- cbind(conf,cU,fU)#
+	return(x)#
+}
+ChiFCritVal()
+library(devtools)
+devtools::create("/Users/jennstarling/TAMU/starlib")
+A <- matrix(c(2,-1,-1,2),nrow=2,byrow=T)
+A
+eigen(A)
+v <- c(1,1)
+sqrt(2)
+1/sqrt(2)
+?rref
+install('pracma')
+library(pracma)
+rref(A)
+qr.R(A)
+library(Matrix)
+rankMatrix(A)
+x <- rexp(10)#
+xmin <- min(x)
+x
+xmin
+temp <- rep(0,10000)#
+for (i in 1:10000) temp[i] <- min(rexp(10))#
 #
-#Extract observed data:#
-hipRebal <- getdata(hip,hipRebal_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hipRebal <- data.frame(class=hipRebal$class,hip1b[,1:141])#
-#
-table(hipRebal$class)#
-calcProps(hipRebal)
-p <- em2$p#
-n2 <- 3000#
-hipRebal_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')#
-#
-#Extract observed data:#
-hipRebal <- getdata(hip,hipRebal_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hipRebal <- data.frame(class=hipRebal$class,hipRebal[,1:141])#
-#
-table(hipRebal$class)#
-calcProps(hipRebal)
-p <- em2$p
-p
-hipRebal_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')
-hipRebal_strata
-head(hipRebal_strata)
-dim(hipRebal_strata)
-class
-unique(hip$class)
-classes
-p <- calcProps(hip)
-p
-hip1a_strata <- strata(data=hip,stratanames="class",size=p*n1,method='srswr')#
-hip1b_strata <- strata(data=hip,stratanames="class",size=p*n2,method='srswr')#
-#
-#Extract observed data:#
-hip1a <- getdata(hip,hip1_strata)#
-hip1b <- getdata(hip,hip2_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip1a <- data.frame(class=hip1a$class,hip1a[,1:141])#
-hip1b <- data.frame(class=hip1b$class,hip1b[,1:141])#
-#
-table(hip1a$class)#
-table(hip1b$class)
-table(hipRebal$class)
-#Pull two random data sets from hip, with similar class proportions.#
-#One will be treated as 'known', and the other as 'unknown', for classification demo.#
-#
-p1 <- calcProps(hip)#
-p2 <- calcProps(linear)#
-n1 <- 1000; n2 <- 3000#
-hip2a_strata <- strata(data=hip,stratanames="class",size=p1*n1,method='srswr')#
-hip2b_strata <- strata(data=hip,stratanames="class",size=p2*n2,method='srswr')#
-#
-#Extract observed data:#
-hip2a <- getdata(hip,hip2a_strata)#
-hip2b <- getdata(hip,hip2b_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip2a <- data.frame(class=hip2a$class,hip2a[,1:141])#
-hip2b <- data.frame(class=hip2b$class,hip2b[,1:141])#
-#
-table(hip2a$class)#
-table(hip2b$class)#
-#
-#Classification is successful here, even when proportions vary a bit.#
-ctrl <- trainControl(method='none', classProbs=F) #Fit one model to the data.         #
-grid <- data.frame(.mtry=round(sqrt(length(feature_names)))) #Sets a grid of mtry values (just 1, here).#
-#
-#OOB RF with Feature Selection: Train model using out of box RF. #
-ctrl$sampling <- NULL #Adjust sampling parameter in trainControl.#
-model2 <- myRF(known=hip2a, unknown=hip2b,ctrl=ctrl,keeps=c('class',feature_names),grid=grid,sampsize=NULL)#
-#
-#PLOTS:#
-#Plot of joint densities for a given feature:#
-plot(density(hip2a$logPeriod),type='l',col='black',#
-	main='Feature: LogPeriod.  All classes, with different class proportions.')#
-lines(density(hip2b$logPeriod),type='l',col='blue')#
-#
-#SHOW BOTH PLOTS TOGETHER:#
 par(mfrow=c(1,2))#
-#
-#Plot of joint densities for a given feature:#
-plot(density(hip1a$logPeriod),type='l',col='black',main='Similar class proportions')#
-lines(density(hip1b$logPeriod),type='l',col='blue')#
-#
-#Plot of joint densities for a given feature:#
-plot(density(hip2a$logPeriod),type='l',col='black',main='Different class proportions')#
-lines(density(hip2b$logPeriod),type='l',col='blue')#
-#
-par(mfrow=c(1,2))
-#SIM1:#
-em1 <- emAllFeatures(known=hip1a,unknown=hip1b,p=rep(.2,5),maxiter=1000,conv=.00000001)#
-em1$p#
-calcProps(hip1b)#
-#
-#SIM2:#
-em2 <- emAllFeatures(known=hip2a,unknown=hip2b,p=rep(.2,5),maxiter=1000,conv=.00000001)#
-em2$p#
-calcProps(hip2b)
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p
-hip_rebal <- getdata(hip,rebal_strata)
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-calcProps(hip_rebal)
-rbind(unique(hip_rebal$class,calcProps(hip_rebal)))
-unique(hip_rebal$class)
-calcProps(hip_rebal)
-plot(density(hip2a$A14),col='black')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
-#
-hip_rebal <- getdata(hip,rebal_strata)#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-unique(hip_rebal$class)#
-calcProps(hip_rebal)#
-em2$p#
-#
-lines(density(hip_rebal$A14),col='red')
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
-#
-hip_rebal <- getdata(hip,rebal_strata)#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-unique(hip_rebal$class)#
-calcProps(hip_rebal)#
-em2$p#
-#
-lines(density(hip_rebal$A14),col='red')
-legend(x=0.04,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.5#
-	col=c('black','blue','red'))
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.5,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.5,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.1,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.2,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=5,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=2,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=1,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.9,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Proportion Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=1,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=1,#
-	col=c('black','blue','red'))
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 1:#
+hist(temp,freq=F)#
+hist(temp,freq=F,nclass=40)
 par(mfrow=c(1,2))#
-train <- list(#
-	hip2a[hip2a$class=='eb','A14'],#
-	hip2a[hip2a$class=='lpv','A14'],#
-	hip2a[hip2a$class=='rrab','A14'],#
-	hip2a[hip2a$class=='rrc','A14'],#
-	hip2a[hip2a$class=='sxp_ds','A14'])#
+hist(temp,freq=F)#
+hist(temp,freq=F,nclass=40)#
 #
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10),main='Training Set Densities: Feature A14')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')#
-#
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 2:#
-#
-#Right slide: Plot 3 densities:#
-#1. Density for the feature in test,#
-#2. Density for the feature in training,#
-#3. Density for the feature in training after adjusting for the change in class proportions.	#
-#
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
-#
-hip_rebal <- getdata(hip,rebal_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-unique(hip_rebal$class)#
-calcProps(hip_rebal)#
-em2$p#
-#
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=1,#
-	col=c('black','blue','red'))
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.75,#
-	col=c('black','blue','red'))
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 1:#
+#Looks like the min has exponential distribution, based on graph.#
+x <- seq(0,1,length=1001)#
+lines(x,10*exp(-10*x))
 par(mfrow=c(1,2))#
-train <- list(#
-	hip2a[hip2a$class=='eb','A14'],#
-	hip2a[hip2a$class=='lpv','A14'],#
-	hip2a[hip2a$class=='rrab','A14'],#
-	hip2a[hip2a$class=='rrc','A14'],#
-	hip2a[hip2a$class=='sxp_ds','A14'])#
+hist(temp,freq=F)#
+hist(temp,freq=F,nclass=40)#
 #
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10),main='Training Set Densities: Feature A14')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')#
-#
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 2:#
-#
-#Right slide: Plot 3 densities:#
-#1. Density for the feature in test,#
-#2. Density for the feature in training,#
-#3. Density for the feature in training after adjusting for the change in class proportions.	#
-#
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
-#
-hip_rebal <- getdata(hip,rebal_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-unique(hip_rebal$class)#
-calcProps(hip_rebal)#
-em2$p#
-#
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density using EM Estimates"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.75,#
-	col=c('black','blue','red'))
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10),#
-	main='Training Set Densities by Class: Feature A14')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 1:#
+#Looks like the min has exponential distribution, based on graph.#
+x <- seq(0,1,length=1001)#
+lines(x,10*exp(-10*x),col='blue',lwd=2)
+x <- rexp(n=1000,rate=1)#
+y <- rexp(n=1000,rate=1)
+z <- x+y
+hist(z,freq=F)
+hist(z,freq=F,nclass=40)
+hist(z,freq=F,nclass=40)#
+lines(x,x*exp(-x),col='blue',lwd=2)
+x
+z <- rexp(1000) + rexp(1000)
+z
+hist(z,freq=F,nclass=40)#
+lines(x,x*exp(-x),col='blue',lwd=2)
 par(mfrow=c(1,2))#
-train <- list(#
-	hip2a[hip2a$class=='eb','A14'],#
-	hip2a[hip2a$class=='lpv','A14'],#
-	hip2a[hip2a$class=='rrab','A14'],#
-	hip2a[hip2a$class=='rrc','A14'],#
-	hip2a[hip2a$class=='sxp_ds','A14'])#
+hist(temp,freq=F)#
+hist(temp,freq=F,nclass=40)#
 #
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10),#
-	main='Training Set Densities by Class: Feature A14')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')#
+#Looks like the min has exponential distribution, based on graph.#
+x <- seq(0,1,length=1001)#
+lines(x,10*exp(-10*x),col='blue',lwd=2)
+temp <- rep(0,1000)#
+for (i in 1:10000) temp[i] <- rexp(1) + rexp(1)
+z <- rep(0,1000)#
+for (i in 1:10000) z[i] <- rexp(1) + rexp(1)#
 #
-legend(x=0.02,y=25,#
-	c('eb','lpv','rrab','rrc','sxp_ds'),#
-	lty=c(1,1,1,1,1), lwd=c(2.5,2.5,2.5,2.5,2.5),cex=.75,#
-	col=c('black','blue','red','forestgreen','purple'))#
+hist(z,freq=F,nclass=40)#
+lines(x,x*exp(-x),col='blue',lwd=2)
+hist(z,freq=F,nclass=40)#
 #
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 2:#
-#
-#Right slide: Plot 3 densities:#
-#1. Density for the feature in test,#
-#2. Density for the feature in training,#
-#3. Density for the feature in training after adjusting for the change in class proportions.	#
-#
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
-#
-hip_rebal <- getdata(hip,rebal_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-unique(hip_rebal$class)#
-calcProps(hip_rebal)#
-em2$p#
-#
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density (EM)"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.75,#
-	col=c('black','blue','red'))
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 1:#
-par(mfrow=c(1,2))#
-train <- list(#
-	hip2a[hip2a$class=='eb','A14'],#
-	hip2a[hip2a$class=='lpv','A14'],#
-	hip2a[hip2a$class=='rrab','A14'],#
-	hip2a[hip2a$class=='rrc','A14'],#
-	hip2a[hip2a$class=='sxp_ds','A14'])#
-#
-plot(density(train[[1]]),col='black',xlim=c(-.025,.10),#
-	main='Training Set Densities by Class: Feature A14')#
-lines(density(train[[2]]),col='blue')#
-lines(density(train[[3]]),col='red')#
-lines(density(train[[4]]),col='forestgreen')#
-lines(density(train[[5]]),col='purple')#
-#
-legend(x=0.025,y=30,#
-	c('eb','lpv','rrab','rrc','sxp_ds'),#
-	lty=c(1,1,1,1,1), lwd=c(2.5,2.5,2.5,2.5,2.5),cex=.75,#
-	col=c('black','blue','red','forestgreen','purple'))#
-#
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#PLOT 2:#
-#
-#Right slide: Plot 3 densities:#
-#1. Density for the feature in test,#
-#2. Density for the feature in training,#
-#3. Density for the feature in training after adjusting for the change in class proportions.	#
-#
-#Rebalance hip data to get estimated density, using est EM proportions from 2nd simulation.#
-rebal_strata <- strata(data=hip,stratanames="class",size=em2$p*n2,method='srswr')#
-table(rebal_strata$Stratum)#
-table(rebal_strata$Stratum)/n2#
-em2$p#
-#
-hip_rebal <- getdata(hip,rebal_strata)#
-#
-#Move class to first column, drop other columns introduced by strata (ID_unit,prob,etc.)#
-hip_rebal <- data.frame(class=hip_rebal$class,hip_rebal[,1:141])#
-unique(hip_rebal$class)#
-calcProps(hip_rebal)#
-em2$p#
-#
-#Plot training and test set densities.#
-plot(density(hip2a$A14),col='black',xlim=c(-.025,.15),main='A14 Feature Densities')#
-lines(density(hip2b$A14),col='blue')#
-#
-#Add rebalanced test set density and legend to plot.#
-lines(density(hip_rebal$A14),col='red')#
-#
-legend(x=0.025,y=30,#
-	c("Training Density","Test Density","Rebalanced Test Density (EM)"),#
-	lty=c(1,1,1), lwd=c(2.5,2.5,2.5),cex=.75,#
-	col=c('black','blue','red'))
+x <- seq(0,10,length=1001*10)#
+lines(x,x*exp(-x),col='blue',lwd=2)
+library(devtools)
+setwd('/Users/jennstarling/UTAustin/starlib')
