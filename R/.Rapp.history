@@ -1185,3 +1185,125 @@ plot(1:output$iter,output$obj[1:output$iter],type='l',log='xy',col='blue',xlab=p
 	ylab='objective function')#
 lines(1:outputAccel$iter,outputAccel$obj[1:outputAccel$iter],type='l',col='red',xlab=paste('iter ',1,' to ',outputAccel$iter),#
 	ylab='objective function')
+soft.thresholding <- function(x, lambda){#
+#
+  # Computes the soft thresholding estimator#
+#
+  # ----------------------------------------#
+#
+  # Args: #
+#
+  #   - x: vector of the observations#
+#
+  #   - lambda: penalization parameter (threshold)#
+#
+  # Returns: #
+#
+  #   - theta: the soft thresholding estimator#
+#
+  # ------------------------------------------#
+#
+  theta <- sign(x) * pmax(rep(0, length(x)), abs(x) - lambda)#
+#
+  return (theta)#
+#
+}
+x = c(1:10)
+soft.thresholding(x,.5)
+#Parametric bootstrap for var(theta).#
+B <- 1000#
+mu_boot <- rep(0,B)#
+theta_boot <- rep(0,B)	#Initialize vector to hold bootstrap theta estimates.#
+#
+mu = 5#
+sigma = 1#
+n = 100#
+#
+th_hat <- exp(mean(rnorm(n,mu,sigma)))#
+#
+for (i in 1:B){#
+	#Draw a sample from the distribution, since parametric.#
+	y_boot <- rnorm(n,mu,sigma)#
+	#Calculate statistics from the bootstrap draw.#
+	mu_boot[i] <- mean(y_boot)#
+	theta_boot[i] <- exp(mu_boot[i])#
+}#
+#
+#Display bootstrapped variance.#
+var_theta_boot <- var(theta_boot)#
+var_theta_boot#
+#
+#Display 95% CI: (Using percentile interval)#
+quantile(theta_boot,c(.025,.975))#
+#
+#Display 95% CI: (Using normal interval, for fun.  This interval is wider.)#
+th_hat + c(-1,1) * 1.96 * sqrt(var_theta_boot)
+th_hat
+n=5
+mat = matrix(rnorm(n*n),nrow=n)#
+		mat[lower.tri(mat)] <- 0#
+		diag(mat) <- 1
+mat
+#----------------------------------------------------------------#
+#
+vecAngle <- function(x,y) acos(sum(x %*% y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)) ))
+x = c(1,2,3)
+y = c(4,5,6)
+vecAngle(x,y)
+sum(x %*% y)
+(sqrt(sum(x^2)) * sqrt(sum(y^2)) )
+acos(sum(x %*% y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)) ))
+acos(0.97463184619707621)
+#Dirichlet Log-likelihood function:#
+dirichlet.loglik <- function(data,alpha){	#
+	N <- nrow(data)						#Number of (j) observations.#
+	logxi <- colMeans(log(data))		#logxi = (1/N)*sum(log(x_ij)#
+	logl <- N* (lgamma(sum(alpha)) - sum(lgamma(alpha)) + sum((alpha-1)*logxi))#
+#
+	return(logl)	#
+}
+x = c(1,2,3,4,5)
+alpha = c(.25,.25,.25,.25)
+dirichlet.loglik(x,alpha)
+x = matrix(rnorm(4*5),nrow=5,ncol=4)
+x
+alpha = c(.2,.3,.4,.1)
+sum(alpha)
+dirichlet.loglik(x,alpha)
+x = abs(x)
+x
+dirichlet.loglik(x,alpha)
+?lgamma
+linear.regression <- function(X,y){#
+#
+	n = length(y)#
+	X = as.matrix(cbind(rep(1,n),X))#
+	beta_hat <- solve(t(X) %*% X) %*% t(X) %*% y#
+#
+	#Calculate y_hat and RSS.#
+	y_hat <- X %*% beta_hat#
+	RSS <- t(y - X %*% beta_hat) %*% (y - X %*% beta_hat)#
+#
+	n <- nrow(X)	#Number of obs.#
+	p <- 4			#Number of predictors.#
+	sigma2_hat <- RSS / (n-p-1)		#Estimate of sigma^2.#
+	sigma_hat <- sqrt(sigma2_hat)	#Estimate of sigma.#
+#
+	#Estimated standard error and CI for each coefficient:#
+	beta_hat_se <- sqrt( sigma2_hat * diag(solve(t(X) %*% X)) ) #Standard errors.#
+#
+	#95% CI for beta_hat's.#
+	lb <- beta_hat -  1.96 * beta_hat_se#
+	ub <- beta_hat + 1.96 * beta_hat_se#
+	sig <- ifelse( (lb < 0) & (ub > 0), 0,1)#
+#
+	#Display CI, including star for betas not equal to zero based on the CI.#
+	ci = data.frame(lower.bound=lb,upper.bound=ub,sig.coefs=sig)#
+	return(list(beta_hat = beta_hat, #
+				RSS = RSS, #
+				sigma_hat = sigma_hat, #
+				beta_hat_se = beta_hat_se, #
+				ci = ci,#
+				n=n,#
+				p = ncol(X)-1))#
+} #End myLinearReg function.

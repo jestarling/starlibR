@@ -1,3 +1,8 @@
+#Orinary Least Squares linear regression.
+
+#X is design matrix (n*p) with no intercept vector of 1's.
+#y is vector of responses (length n)
+
 linear.regression <- function(X,y){
 
 	n = length(y)
