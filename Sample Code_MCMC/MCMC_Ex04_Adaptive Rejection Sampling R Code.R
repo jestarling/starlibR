@@ -1,22 +1,30 @@
 #ADAPTIVE REJECTION SAMPLING FUNCTION
 
-#Set up original function fx, hx=logfx, and hpx=d/dx (hx).
-f = function(x,a) x^a * (1-x)^a #for 0<x<1, a>0.
-h = function(x,a) a*log(x) + a*log(1-x)
-hp = function(x,a) a/x - a/(1-x)
+#Same code as Exercise 3, just with different functions.
+#More general, as no 'a' parameter for h function.
 
-a = 2	#Set any arguments for f/h/hp outside the function.
+#Set up original function fx, hx=logfx, and hpx=d/dx (hx).
+f  = function(x) x^3 * exp(-2*x) * (1-exp(-2*x))^3
+h  = function(x) 3*log(x) - 2*x + 3*log(1-exp(-2*x))
+hp = function(x) 3/x - 2 + 6/(exp(2*x)-1)
+
+#Inspect log-concave h for good starting points.
+pdf(file='/Users/jennstarling/UTAustin/2017S_MCMC/Exercises/Exercise-04/Problem_1_ARS_logfx.pdf')
+x = seq(0,10,by=.01)
+hx = h(x)
+plot(x,hx,type='l',col='blue',main='logfx to eyeball starting points')
+dev.off()
 
 #Call function.
-fx_samp = adaptive_rej_sampling(f,h,hp,n=1000,c(.25,.75),xlb=0,xub=1)
-
-#fx_samp = adaptive_rej_sampling(f,h,hp,M,n=1000,c(.25,.75),xlb=-Inf,xub=Inf)
+fx_samp = adaptive_rej_sampling(f,h,hp,n=1000,c(.1,7),xlb=-Inf,xub=Inf)
 
 #Plot results.
+pdf(file='/Users/jennstarling/UTAustin/2017S_MCMC/Exercises/Exercise-04/Problem_1_ARS.pdf')
 fx_samp$p_accept
-hist(fx_samp$fx_sample,freq=F)
-x=seq(0,1,by=.001)
-lines(x,(1/beta(a+1,a+1))*f(x,a),col='blue')
+hist(fx_samp$fx_sample,freq=F,main='Adaptive Rejection Sampling',xlab='Samples of f(x)')
+x=seq(0,10,by=.001)
+lines(x,3*f(x),col='blue')
+dev.off()
 
 ##############################
 ###   MAIN ARS FUNCTION:   ###
@@ -73,7 +81,7 @@ adaptive_rej_sampling = function(f,h,hp,n=10,x,xlb=0,xub=1){
 		
 		#Shift and rotate the exponential sample as needed.
 		if(hpx<0){
-			#If slope negative, generate using neg slope (bc slope = -exponential rate), and shift result.
+			#If slope negative, generate using neg slope, and shift result.
 			x_star = rtexp(n=1,m=-hpx,t=z2-z1)
 			x_star = z1 + x_star
 		} else{
@@ -92,14 +100,14 @@ adaptive_rej_sampling = function(f,h,hp,n=10,x,xlb=0,xub=1){
 		x1 = new_envelope$x[A_idx]		#For calculation of value of tangent line at x_star.
 		b =  new_envelope$b[A_idx]		#The slope for the calculation of the tangent line value at x_star.
 		
-		log_g = hp(x1,a) * x_star + b	#Value of piecewise linear envelope at x_star.
+		log_g = hp(x1) * x_star + b	#Value of piecewise linear envelope at x_star.
 		g = exp(log_g)					#Value of piecewise exponential at x_star.
 	
 		#Accept x_star as from f(x) if fx/gx <= a uniform draw.
 		#	If accept, then add x_star to fx_sample vector.
 		#	If reject, then add x_star to x vector of points to sample, and start over.
 		
-		if (u <= f(x_star,a) / g){
+		if (u <= f(x_star) / g){
 			fx_sample = c(fx_sample,x_star)
 			accepts = accepts + 1
 		} else{
@@ -132,8 +140,8 @@ update_envelope = function(x,h,hp,xlb,xub){
 	#	b = y-intercept for tangent lines
 	
 	x = sort(x)
-	hx = h(x,a)		#Values of logf(x) at each x.
-	hpx = hp(x,a)	#Slopes
+	hx = h(x)	#Values of logf(x) at each x.
+	hpx = hp(x)	#Slopes
 
 	m = hpx			#slopes
 	b = hx - hpx*x	#intercepts
@@ -204,36 +212,3 @@ itexp = function(u,m,t){
 	#t = level of truncation; x value at which to truncate.
 	return(-log(1-u*(1-exp(-t*m)))/m)
 }
-
-##################################################
-###   COMPARISON TO EXISTING R PACKAGE (ARS)   ###
-##################################################
-
-library(ars)
-#Choose k starting points.
-#	If domain unbounded on left, choose x1 so h'(x1) > 0.
-#	If domain unbounded on right, choose xk so h'(xk) < 0.
-
-k = 3
-t = c(.25,.5,.75)
-
-#f = function that computes log(f(u)) where f(u) is proportional to density we want to sample from
-f = function(u) a*log(u) + a*log(1-u)
-
-#fprima = d/du log(f(u))
-fprima = function(u) a/u - a/(1-u)
-
-#xlb and xub = lower bound and upper bound of x values
-xlb = 0
-xub = 1
-
-fx = ars(n=1000,f,fprima,x=c(.25,.5,.75),m=3,lb=T,xlb=0,ub=T,xub=1) #x = starting points where log(f(u)) defined.
-
-#Plot results:
-hist(fx,freq=F)
-
-fx_fun = function(x,a) x^a * (1-x)^a
-x = seq(.001,.999,by=.001)
-lines(x,(1/beta(a+1,a+1))*fx_fun(x,a),type='l',col='blue')
-
-#------------------------------------------------------------------------------
