@@ -16,7 +16,7 @@ plot(x,hx,type='l',col='blue',main='logfx to eyeball starting points')
 dev.off()
 
 #Call function.
-fx_samp = adaptive_rej_sampling(f,h,hp,n=1000,c(.1,7),xlb=-Inf,xub=Inf)
+fx_samp = adaptive_rej_sampling(f,h,hp,n=10000,c(.1,7),xlb=-Inf,xub=Inf)
 
 #Plot results.
 pdf(file='/Users/jennstarling/UTAustin/2017S_MCMC/Exercises/Exercise-04/Problem_1_ARS.pdf')
