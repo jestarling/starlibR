@@ -4,7 +4,6 @@ rref <- function(A, tol=sqrt(.Machine$double.eps),verbose=FALSE,
   ## tol: tolerance for checking for 0 pivot
   ## verbose: if TRUE, print intermediate steps
   ## fractions: try to express nonintegers as rational numbers
-  ## Written by John Fox
   if (fractions) {
     mass <- require(MASS)
     if (!mass) stop("fractions=TRUE needs MASS package")
