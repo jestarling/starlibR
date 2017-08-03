@@ -1,7 +1,7 @@
 #Dirichlet Log-likelihood function:
 
 #data must be n*k matrix.
-alpha must be length k vector, summing to 1.  All values must be in (0,1).
+#alpha must be length k vector, summing to 1.  All values must be in (0,1).
 
 dirichlet.loglik <- function(data,alpha){	
 	N <- nrow(data)						#Number of (j) observations.

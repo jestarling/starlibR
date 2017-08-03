@@ -1,0 +1,136 @@
+---
+title: "(ProjectName) Project Description"
+author: "Description Author"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    code_folding: hide
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    fig_caption: true
+---
+
+```{r setReportOptions, echo=FALSE}
+
+library(knitr)
+opts_chunk$set(fig.path="Figures/projDesc_")
+
+```
+
+# Project Overview
+
+<!-- Who is this for? -->
+
+## Personnel
+
+This project is for _PI NAME_ in the Department of _DEPT NAME_. Bioinformatics personnel are _NAMES_.
+
+## Motivating Question
+
+What are we trying to understand?   
+How does this relate to basic biology and/or patient care?   
+How will the data being collected supply information relevant to addressing these issues?
+
+## Timeline Constraints
+
+Are there deadlines we're trying to meet? When? 
+
+## Protocol and/or Funding Source
+
+Where are the resources coming from?
+
+## Project Folder Name and Location
+
+This project is located in 
+* full path to this folder location
+* is this on a shared drive?
+* is this a persistent repository?
+
+# Data and Methods
+
+## Raw Data Location
+
+Where is the raw data? Supply a web link or relative path.  
+Is this a persistent repository?  
+When did we first get it?
+
+Where is the relevant metadata (e.g., sample labels)? "As above" works, if this is true. 
+
+Where is the relevant clinical data? 
+
+Are we still waiting for any data? If so, when do we expect it?
+
+## Brief Data Description
+
+What type of data is this? (E.g., RNA-Seq, methylation array)  
+What format is the data in? (E.g., Excel file, BAM files)  
+How many samples do we (should we?) have data for?  
+
+How do we expect this data to relate to the motivating question?
+
+### Experimental Design
+
+What do we know about the experimental design?  
+
+What sample groups are to be contrasted?  
+Are there reasons we might need to be particularly concerned about batch effects and/or confounding?
+
+Was the sample size chosen based on some type of power calculation? If so, what was the primary endpoint?
+
+## Analysis Outline
+
+### Data Gathering
+
+What types of data gathering will be required?
+
+### Data Preprocessing
+
+What types of data preprocessing (including data cleaning) will be required?  
+Can we specify the workflow, including software and metadata to be used?
+
+### Statistical Tests
+
+What types of summary statistics will be provided?
+
+What tests will we use for our comparisons? Two-sample t-tests? ANOVA? Cox PH models?
+
+Do we need to worry about multiple testing? If so, do we have a rough idea of how we will address this? (E.g., fitting beta-uniform mixture models to the distribution of p-values, and selecting all variates significant at a specified false discovery rate (FDR))
+
+Are there some types of outcomes which can be described as "success" or "failure" _a priori_?
+
+### Software
+
+What software do we expect to use for the analyses described above? What versions?
+
+### Sanity Checks
+
+Are there some differences we know should be there before we run the experiment? What are they? What direction should the differences be in?
+
+Do we know what "no structure" should look like?
+
+Do we expect a principal components analysis (PCA) plot to show clear differences other than those associated with the contrast of interest?
+
+Do we need to consider training and test sets?
+
+Do we have enough data to allow for determining an empirical null distribution based on permutation?
+
+### Figures
+
+Are there specific figures we anticipate producing?
+
+## Results
+
+What output files, reports, figures, and other deliverables do we expect to produce?
+
+Do we have a rough timeframe / order for when these might be expected, at least for the first few?
+
+# Appendix
+
+```{r appendixInfo}
+
+getwd()
+sessionInfo()
+
+```
+
